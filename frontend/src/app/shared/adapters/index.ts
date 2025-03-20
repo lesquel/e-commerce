@@ -1,0 +1,1 @@
+export { metaAdapter } from './meta.adapter'; 

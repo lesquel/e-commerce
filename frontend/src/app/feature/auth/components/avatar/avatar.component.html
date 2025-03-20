@@ -1,0 +1,21 @@
+<ul class="menu menu-horizontal">
+  <li>
+    <details>
+      <summary>
+        <div class="avatar">
+          <div class="w-8 rounded">
+            <img
+              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              alt="Tailwind-CSS-Avatar-component"
+            />
+          </div>
+        </div>
+      </summary>
+      <ul class="p-2">
+        <li><a [routerLink]="['/auth/me']">Me</a></li>
+        <li><a [routerLink]="['/teams/me']">Mi equipo</a></li>
+        <li><p (click)="logout()">Logout</p></li>
+      </ul>
+    </details>
+  </li>
+</ul>

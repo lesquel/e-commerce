@@ -1,0 +1,5 @@
+@if (isAuthenticated) {
+<app-avatar />
+} @else {
+  <a class="btn" [routerLink]="['/auth/login']">Login</a>
+}
