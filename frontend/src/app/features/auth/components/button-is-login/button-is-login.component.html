@@ -1,6 +1,6 @@
 @if (isAuthenticated) {
 <app-avatar />
 } @else {
-  <a class="btn" [routerLink]="['/auth/login']">Login</a>
-  <a class="btn btn-neutral" [routerLink]="['/auth/register']">Register</a>
+<a class="btn" [routerLink]="[routesConfig.login.url]">Login</a>
+<a class="btn" [routerLink]="[routesConfig.register.url]">Register</a>
 }

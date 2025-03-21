@@ -8,6 +8,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '@shared/components';
 import { AuthService } from '../services';
+import { routesConfig } from '../config';
 
 @Component({
   selector: 'register-page',
@@ -57,7 +58,7 @@ import { AuthService } from '../services';
           Register
         </button>
       </form>
-      <a [routerLink]="['/auth/login']" class="link"
+      <a [routerLink]="[routesConfig.login.url]" class="link"
         >Already have an account? Log in</a
       >
     </div>
@@ -65,6 +66,7 @@ import { AuthService } from '../services';
 })
 export class RegisterPage {
   authSevice = inject(AuthService);
+  routesConfig = routesConfig;
   errorMessage = '';
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

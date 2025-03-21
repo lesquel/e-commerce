@@ -5,13 +5,13 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'home-page',
   imports: [
-    HeroHomeComponent,
+    // HeroHomeComponent,
 
     RouterLink,
   ],
   template: `
-    <app-hero-home />
-    <a [routerLink]="['/teams']" routerLinkActive="router-link-active">
+    <!-- <app-hero-home /> -->
+    <a [routerLink]="['/teams']" routerLinkActive="router-link-active"> </a>
   `,
 })
 export class HomePage {}

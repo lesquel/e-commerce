@@ -12,8 +12,7 @@
         </div>
       </summary>
       <ul class="p-2">
-        <li><a [routerLink]="['/auth/me']">Me</a></li>
-        <li><a [routerLink]="['/teams/me']">Mi equipo</a></li>
+        <li><a [routerLink]="[routesConfig.me.url]">Mi cuenta</a></li>
         <li><p (click)="logout()">Logout</p></li>
       </ul>
     </details>
