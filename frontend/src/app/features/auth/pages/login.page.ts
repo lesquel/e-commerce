@@ -5,7 +5,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AlertComponent } from '../../../components';
+import { AlertComponent } from '@shared/components/alert/alert.component';
 import { AuthService } from '../services';
 import { RouterLink } from '@angular/router';
 
