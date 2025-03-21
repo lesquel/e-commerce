@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Image } from '../models';
-import { UserService } from '../../feature/auth/services';
+import { UserService } from '@features/auth/services';
 
 @Injectable({
   providedIn: 'root',
