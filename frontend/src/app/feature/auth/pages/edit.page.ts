@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService, UserService } from '../services';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AlertComponent } from '../../../components';
-import { onFileSelected } from '../../../shared/utils';
+import { AlertComponent } from '@shared/components';
+import { onFileSelected } from '@shared/utils';
 
 @Component({
   selector: 'edit-page',
@@ -21,13 +21,6 @@ import { onFileSelected } from '../../../shared/utils';
         class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box"
       >
         <legend class="fieldset-legend">Edit</legend>
-
-        <input
-          type="file"
-          class="file-input file-input-ghost"
-          accept="image/*"
-          (change)="onFileSelected($event)"
-        />
 
         <label class="fieldset-label">Email</label>
         <input formControlName="email" type="email" class="input" />
@@ -63,17 +56,12 @@ export class EditPage implements OnInit {
       this.errorMessage = 'Please fill in all fields correctly';
       return;
     }
-
-    const formData = new FormData();
     const formValue = this.editForm.value;
 
-    formData.append('username', formValue.username as string);
-    formData.append('email', formValue.email as string);
-    if (this.selectedFile) {
-      formData.append('avatar', this.selectedFile);
-    }
-
-    this.authService.edit(formData).subscribe({
+    this.authService.edit({
+      username: formValue.username as string,
+      email: formValue.email as string,
+    }).subscribe({
       next: () => {
         this.errorMessage = '';
       },
