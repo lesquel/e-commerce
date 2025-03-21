@@ -4,9 +4,10 @@ import { User } from '../models/user.model';
 import { map, catchError, Observable, throwError } from 'rxjs';
 import { userAdapter } from '../adapters';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { ImageService } from '../../../shared/services';
 import { UserService } from './user.service';
+import { routesConfig } from '../config';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +30,7 @@ export class AuthService {
           const adaptedUser = userAdapter(response);
           this.userService.saveUser(adaptedUser);
           this.router.navigate(['/']);
+          localStorage.setItem('user', JSON.stringify(adaptedUser.jwt));
           return adaptedUser;
         }),
         catchError((error) => {
@@ -43,7 +45,7 @@ export class AuthService {
   me(user: User): Observable<User> {
     const jwt = user.jwt;
     return this.http
-      .get<User>(this.baseUrl + 'api/users/me?populate=avatar', {
+      .get<User>(this.baseUrl + 'api/users/me', {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
@@ -61,7 +63,7 @@ export class AuthService {
   register({
     email,
     username,
-    password
+    password,
   }: {
     email: string;
     username: string;
@@ -118,6 +120,7 @@ export class AuthService {
         map((user) => {
           const userUpdated = userAdapter({ user: user, jwt });
           this.userService.saveUser(userUpdated);
+          this.router.navigate([routesConfig.me.url]);
           return userUpdated;
         }),
         catchError((error) => {

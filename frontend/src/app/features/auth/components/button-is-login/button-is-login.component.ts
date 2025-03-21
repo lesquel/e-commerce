@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {  UserService } from '../../services';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from "../avatar/avatar.component";
+import { routesConfig } from '../../config';
 
 @Component({
   selector: 'app-button-is-login',
@@ -11,5 +12,6 @@ import { AvatarComponent } from "../avatar/avatar.component";
 })
 export class ButtonIsLoginComponent {
   private userService = inject(UserService);
+  routesConfig = routesConfig;
   protected isAuthenticated = this.userService.isAuthenticated();
 }

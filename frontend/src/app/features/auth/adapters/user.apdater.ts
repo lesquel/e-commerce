@@ -1,4 +1,3 @@
-import { imgAdapter } from '../../../shared/utils';
 import { User } from '../models';
 
 export const userAdapter = (user: any): User => {

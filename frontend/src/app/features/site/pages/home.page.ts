@@ -4,9 +4,9 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'home-page',
-  imports: [HeroHomeComponent, RouterLink],
+  imports: [ RouterLink],
   template: `
-    <app-hero-home />
+    <!-- <app-hero-home /> -->
     <a [routerLink]="['/teams']" routerLinkActive="router-link-active"> </a>
   `,
 })
