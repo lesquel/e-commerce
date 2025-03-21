@@ -40,7 +40,7 @@ export class AuthService {
       );
   }
 
-  me(user : User): Observable<User> {
+  me(user: User): Observable<User> {
     const jwt = user.jwt;
     return this.http
       .get<User>(this.baseUrl + 'api/users/me?populate=avatar', {
@@ -58,11 +58,15 @@ export class AuthService {
       );
   }
 
-  register(
-    email: string,
-    username: string,
-    password: string
-  ): Observable<User> {
+  register({
+    email,
+    username,
+    password
+  }: {
+    email: string;
+    username: string;
+    password: string;
+  }): Observable<User> {
     return this.http
       .post<User>(`${this.baseUrl}api/auth/local/register`, {
         email,
@@ -85,7 +89,13 @@ export class AuthService {
       );
   }
 
-  edit(form: FormData): Observable<User> {
+  edit({
+    username,
+    email,
+  }: {
+    username: string;
+    email: string;
+  }): Observable<User> {
     const _user = this.userService.getUser();
     if (!_user) {
       return throwError(() => new Error('No user found'));
@@ -94,46 +104,27 @@ export class AuthService {
     if (!jwt) {
       return throwError(() => new Error('No JWT token available'));
     }
-    console.log('Sending data to Strapi:', {
-      userId: _user.id,
-      formEntries: Array.from(form.entries())
-    });
     return this.http
-      .put<User>(`${this.baseUrl}api/users/${_user.id}`, form, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      })
+      .put<User>(
+        `${this.baseUrl}api/users/${_user.id}`,
+        { username, email },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      )
       .pipe(
         map((user) => {
           const userUpdated = userAdapter({ user: user, jwt });
           this.userService.saveUser(userUpdated);
-          if (!form.get('avatar')) {
-            this.router.navigate(['/auth/me']);
-            return userUpdated;
-          }
-          this.imageService.upload(form.get('avatar') as File).subscribe({
-            next: (response) => {
-              this.imageService.linkImagetoEntry(
-                '/api/users/',
-                response[0].id,
-                JSON.stringify(userUpdated.id),
-                'avatar'
-              ).subscribe({
-                next: (response) => {
-                  this.router.navigate(['/auth/me']);
-                },
-                error: (error) => {
-                  console.error(error);
-                },
-              });
-            },
-          });
           return userUpdated;
         }),
         catchError((error) => {
           console.error(error);
-          return throwError(() => new Error(error.error.error.message || 'Me failed'));
+          return throwError(
+            () => new Error(error.error.error.message || 'Me failed')
+          );
         })
       );
   }

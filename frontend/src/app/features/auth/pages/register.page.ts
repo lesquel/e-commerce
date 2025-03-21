@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AlertComponent } from '../../../components';
+import { AlertComponent } from '@shared/components';
 import { AuthService } from '../services';
 
 @Component({
@@ -79,14 +79,18 @@ export class RegisterPage {
     }
     const form = this.registerForm.value;
     this.authSevice
-      .register(form.email || '', form.username || '', form.password || '')
+      .register({
+        email: form.email || '',
+        username: form.username || '',
+        password: form.password || '',
+      })
       .subscribe({
         next: () => {
           this.errorMessage = '';
         },
         error: (error) => {
           this.errorMessage = error.message || 'Register failed';
-        }
+        },
       });
   }
 }

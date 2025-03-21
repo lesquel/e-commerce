@@ -8,7 +8,6 @@ export const userAdapter = (user: any): User => {
     username: user.user.username,
     email: user.user.email,
     createdAt: user.user.createdAt,
-    avatar: user.user.avatar ? imgAdapter(user.user.avatar) : undefined,
     documentId: user.user.documentId,
   };
 };
