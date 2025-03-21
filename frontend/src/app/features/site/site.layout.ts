@@ -1,25 +1,22 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { SiteService } from './services';
 
 @Component({
   selector: 'site-layout',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet],
   template: `
-    <app-navbar />
     <main class="min-h-screen">
       <router-outlet />
     </main>
-    <app-footer />
   `,
 })
 export class SiteLayout implements OnInit {
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private siteService = inject(SiteService);
+  
   ngOnInit(): void {
     this.siteService.getGlobalData().subscribe({
       next: (data) => {

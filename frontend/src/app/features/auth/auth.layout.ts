@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from '../site/components';
+import { NavbarComponent } from '@shared/components';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet],
   template: `
     <div class="container">
-      <app-navbar></app-navbar>
       <main class="min-h-screen">
         <router-outlet></router-outlet>
       </main>

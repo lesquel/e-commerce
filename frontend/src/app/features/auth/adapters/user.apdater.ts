@@ -7,7 +7,7 @@ export const userAdapter = (user: any): User => {
     id: user.user.id,
     username: user.user.username,
     email: user.user.email,
-    createdAt: user.user.createdAt,
+    createdAt: user.user.createdAt  ,
     documentId: user.user.documentId,
   };
 };

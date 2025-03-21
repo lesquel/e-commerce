@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonIsLoginComponent } from '../../../auth/components';
-import { ThemeControllerComponent } from "..";
+import { ButtonIsLoginComponent } from '@features/auth/components';
+import { ThemeControllerComponent } from "@shared/components/theme-controller/theme-controller.component";
 import { RouterLink } from '@angular/router';
 
 @Component({
