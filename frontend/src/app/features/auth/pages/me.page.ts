@@ -4,7 +4,7 @@ import { AuthService, UserService } from '../services';
 
 import { RouterLink } from '@angular/router';
 import { User } from '../models';
-import { routesConfig } from '../config';
+import { authRoutesConfig } from '../config';
 
 @Component({
   selector: 'me-page',
@@ -21,7 +21,7 @@ import { routesConfig } from '../config';
               <br />
               created at: {{ user$()?.createdAt }}
             </p>
-            <a [routerLink]="[routesConfig.edit.url]" class="btn btn-primary">Edit</a>
+            <a [routerLink]="[authRoutesConfig.edit.url]" class="btn btn-primary">Edit</a>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@ import { routesConfig } from '../config';
 export class MePage {
   private authService = inject(AuthService);
   private userService = inject(UserService);
-  routesConfig = routesConfig;
+  authRoutesConfig = authRoutesConfig;
   protected user$ = toSignal(
     this.authService.me(this.userService.getUser() as User)
   );

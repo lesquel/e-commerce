@@ -6,7 +6,7 @@ import { userAdapter } from '../adapters';
 import { Router } from '@angular/router';
 import { ImageService } from '../../../shared/services';
 import { UserService } from './user.service';
-import { routesConfig } from '../config';
+import { authRoutesConfig } from '../config';
 
 @Injectable({
   providedIn: 'root',
@@ -120,7 +120,7 @@ export class AuthService {
         map((user) => {
           const userUpdated = userAdapter({ user: user, jwt });
           this.userService.saveUser(userUpdated);
-          this.router.navigate([routesConfig.me.url]);
+          this.router.navigate([authRoutesConfig.me.url]);
           return userUpdated;
         }),
         catchError((error) => {

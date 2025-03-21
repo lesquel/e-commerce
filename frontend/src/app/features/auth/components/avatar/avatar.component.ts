@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UserService } from '../../services';
 import { RouterLink } from '@angular/router';
-import { routesConfig } from '../../config';
+import { authRoutesConfig } from '../../config';
 
 @Component({
   selector: 'app-avatar',
@@ -11,7 +11,7 @@ import { routesConfig } from '../../config';
 })
 export class AvatarComponent {
   private userService = inject(UserService);
-  routesConfig = routesConfig;
+  authRoutesConfig = authRoutesConfig;
   logout() {
     this.userService.logout();
   }

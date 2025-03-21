@@ -1,0 +1,1 @@
+export { siteRoutesConfig} from './site.routes.config';

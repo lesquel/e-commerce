@@ -8,7 +8,7 @@ import {
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { AuthService } from '../services';
 import { RouterLink } from '@angular/router';
-import { routesConfig } from '../config';
+import { authRoutesConfig } from '../config';
 
 @Component({
   selector: 'login-page',
@@ -51,14 +51,14 @@ import { routesConfig } from '../config';
           Login
         </button>
       </form>
-      <a [routerLink]="[routesConfig.register.url]" class="link">Don't have an account? Sign up</a>
+      <a [routerLink]="[authRoutesConfig.register.url]" class="link">Don't have an account? Sign up</a>
     </div>
   `,
 })
 export class LoginPage {
   authSevice = inject(AuthService);
   errorMessage = '';
-  routesConfig = routesConfig;
+  authRoutesConfig = authRoutesConfig;
   loginForm = new FormGroup({
     identifier: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),

@@ -1,23 +1,21 @@
 import { Routes } from "@angular/router";
-import path from "path";
 import { SiteLayout } from "./site.layout";
-import { Component } from "@angular/core";
 import { HomePage } from "./pages";
-
+import { siteRoutesConfig } from "./config";
 export const siteRoutes: Routes = [
     {
-        path : '',
-        component : SiteLayout,
-        children : [
+        path: siteRoutesConfig.home.path,
+        component: SiteLayout,
+        children: [
             {
-                path : '',
-                component : HomePage
+                path: siteRoutesConfig.home.path,
+                component: HomePage
             }
-            
+
         ],
-        data : {
-            title : 'Home Page'
+        data: {
+            title: 'Home Page'
         }
     }
-    
+
 ]

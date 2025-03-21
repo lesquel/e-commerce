@@ -1,1 +1,1 @@
-export { routesConfig } from './routes.config';
+export { authRoutesConfig} from './auth.routes.config';
