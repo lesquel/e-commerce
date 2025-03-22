@@ -1,6 +1,7 @@
-@if (isAuthenticated) {
-<app-avatar />
-} @else {
-<a class="btn btn-outline" [routerLink]="[authRoutesConfig.login.url]">Login</a>
-<a class="btn" [routerLink]="[authRoutesConfig.register.url]">Register</a>
-}
+<ng-container *ngIf="isAuthenticated">
+    <app-avatar></app-avatar>
+</ng-container>
+<ng-container *ngIf="!isAuthenticated">
+    <a class="btn btn-outline" [routerLink]="[authRoutesConfig.login.url]">Login</a>
+    <a class="btn hover:btn-neutral" [routerLink]="[authRoutesConfig.register.url]">Register</a>
+</ng-container>

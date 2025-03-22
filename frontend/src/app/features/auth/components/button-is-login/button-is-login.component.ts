@@ -3,10 +3,11 @@ import {  UserService } from '../../services';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from "../avatar/avatar.component";
 import { authRoutesConfig } from '../../config';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-button-is-login',
-  imports: [RouterLink, AvatarComponent],
+  imports: [CommonModule,RouterLink, AvatarComponent],
   templateUrl: './button-is-login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
