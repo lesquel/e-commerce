@@ -1,48 +1,14 @@
 <div class="h-screen flex justify-center items-center flex-col gap-4">
-    @if (errorMessage) {
-    <app-alert [text]="errorMessage" type="error" />
-    }
+  @if (errorMessage) {
+  <app-alert [text]="errorMessage" type="error" />
+  }
 
-    <form
-      [formGroup]="registerForm"
-      (ngSubmit)="register($event)"
-      class="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box"
-    >
-      <legend class="fieldset-legend">Register</legend>
+  <app-auth-form [formGroup]="registerForm" [inputFields]="registerInputFields" title="Register"
+    btnSubmitLabel="Create an account" (formSubmit)="register()">
 
-      <label class="fieldset-label">Email</label>
-      <input
-        formControlName="email"
-        type="email"
-        class="input"
-        placeholder="Email"
-      />
+  </app-auth-form>
 
-      <label class="fieldset-label">Username</label>
-      <input
-        formControlName="username"
-        type="text"
-        class="input"
-        placeholder="Username"
-      />
 
-      <label class="fieldset-label">Password</label>
-      <input
-        formControlName="password"
-        type="password"
-        class="input"
-        placeholder="Password"
-      />
 
-      <button
-        class="btn btn-neutral mt-4"
-        type="submit"
-        [disabled]="registerForm.invalid"
-      >
-        Register
-      </button>
-    </form>
-    <a [routerLink]="[authRoutesConfig.login.url]" class="link"
-      >Already have an account? Log in</a
-    >
-  </div>
+  <a [routerLink]="[authRoutesConfig.login.url]" class="link">Already have an account? Log in</a>
+</div>

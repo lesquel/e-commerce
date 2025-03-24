@@ -3,31 +3,49 @@ import {
   FormGroup,
   FormControl,
   Validators,
-  ReactiveFormsModule,
 } from '@angular/forms';
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { AuthService } from '../../services';
 import { RouterLink } from '@angular/router';
 import { authRoutesConfig } from '../../config';
+import { InputField } from '@app/shared/types';
+import { AuthFormComponent } from '../../components/form/auth-form.component';
 
 @Component({
   selector: 'login-page',
   standalone: true,
-  imports: [ReactiveFormsModule, AlertComponent, RouterLink],
+  imports: [AlertComponent, RouterLink,AuthFormComponent],
   templateUrl: "./login.page.html",
 
 })
 export class LoginPage {
-  authSevice = inject(AuthService);
-  errorMessage = '';
+  loginForm!: FormGroup;
+  loginFormInputFields!: InputField[];
   authRoutesConfig = authRoutesConfig;
-  loginForm = new FormGroup({
-    identifier: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
+  errorMessage = '';
 
-  login(event: Event): void {
-    event.preventDefault();
+
+  authSevice = inject(AuthService);
+
+
+  ngOnInit() {
+    this.initLoginForm()
+  }
+
+  initLoginForm() {
+    this.loginForm = new FormGroup({
+      identifier: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+    });
+
+    this.loginFormInputFields = [
+      { name: 'identifier', label: 'Email or username', type: 'text', placeholder: 'Enter your email or username' },
+      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password' },
+    ]
+
+  }
+
+  login() {
     if (!this.loginForm.valid) {
       this.errorMessage = 'Please fill in the form';
       return;

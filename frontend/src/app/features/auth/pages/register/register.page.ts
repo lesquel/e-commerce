@@ -2,30 +2,48 @@ import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
-  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '@shared/components';
 import { AuthService } from '../../services';
 import { authRoutesConfig } from '../../config';
+import { InputField } from '@app/shared/types';
+import { AuthFormComponent } from '../../components/form/auth-form.component';
 
 @Component({
   selector: 'register-page',
-  imports: [RouterLink, ReactiveFormsModule, AlertComponent],
+  imports: [RouterLink,AlertComponent, AuthFormComponent],
   templateUrl: "./register.page.html",
 })
 export class RegisterPage {
-  authSevice = inject(AuthService);
+  registerForm!: FormGroup;
+  registerInputFields!: InputField[];
   authRoutesConfig = authRoutesConfig;
   errorMessage = '';
-  registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
 
-  register(event: Event): void {
+  authSevice = inject(AuthService);
+
+  ngOnInit() {
+    this.initRegisterForm()
+  }
+
+  initRegisterForm() {
+
+    this.registerForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]),
+      password: new FormControl('', [Validators.required]),
+    });
+
+    this.registerInputFields = [
+      { name: 'email', label: 'Email', type: 'text', placeholder: 'Enter your email' },
+      { name: 'username', label: 'Username', type: 'text', placeholder: 'Enter your username' },
+      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password' },
+    ];
+
+  }
+  register() {
     if (!this.registerForm.valid) {
       this.errorMessage = 'Please fill in the form';
       return;
@@ -46,4 +64,5 @@ export class RegisterPage {
         },
       });
   }
+
 }
