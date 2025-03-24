@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { InputField } from '@app/shared/types';
+import { IInputField } from '@app/shared/types';
 import { ErrorHandler } from '@app/shared/utils/getErrorMessage';
 
 @Component({
@@ -12,7 +12,7 @@ import { ErrorHandler } from '@app/shared/utils/getErrorMessage';
 })
 export class AuthFormComponent {
   @Input() formGroup!: FormGroup;
-  @Input() inputFields!: InputField[];
+  @Input() inputFields!: IInputField[];
   @Input() title!: string;
   @Input() btnSubmitLabel: string = 'Send';
 
@@ -28,7 +28,7 @@ export class AuthFormComponent {
 
 
 
-  getErrorMessage(field: InputField) {
+  getErrorMessage(field: IInputField) {
     return ErrorHandler.getErrorMessage(this.formGroup, field.name)
 
   }

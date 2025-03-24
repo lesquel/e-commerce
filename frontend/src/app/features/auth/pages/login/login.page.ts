@@ -8,19 +8,19 @@ import { AlertComponent } from '@shared/components/alert/alert.component';
 import { AuthService } from '../../services';
 import { RouterLink } from '@angular/router';
 import { authRoutesConfig } from '../../config';
-import { InputField } from '@app/shared/types';
+import { IInputField } from '@app/shared/types';
 import { AuthFormComponent } from '../../components/form/auth-form.component';
 
 @Component({
   selector: 'login-page',
   standalone: true,
-  imports: [AlertComponent, RouterLink,AuthFormComponent],
+  imports: [AlertComponent, RouterLink, AuthFormComponent],
   templateUrl: "./login.page.html",
 
 })
 export class LoginPage {
   loginForm!: FormGroup;
-  loginFormInputFields!: InputField[];
+  loginFormInputFields!: IInputField[];
   authRoutesConfig = authRoutesConfig;
   errorMessage = '';
 

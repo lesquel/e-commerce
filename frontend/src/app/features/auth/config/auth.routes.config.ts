@@ -1,4 +1,6 @@
-export const authRoutesConfig = {
+import { IRoute } from "@app/shared/types";
+
+export const authRoutesConfig: Record<string, IRoute> = {
   auth: {
     path: 'auth',
     url: '/auth',
@@ -8,7 +10,7 @@ export const authRoutesConfig = {
     path: 'login',
     url: '/auth/login',
     label: 'Login'
-    
+
   },
   register: {
     path: 'register',

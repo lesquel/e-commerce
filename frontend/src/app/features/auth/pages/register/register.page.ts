@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 import { AlertComponent } from '@shared/components';
 import { AuthService } from '../../services';
 import { authRoutesConfig } from '../../config';
-import { InputField } from '@app/shared/types';
+import { IInputField } from '@app/shared/types';
 import { AuthFormComponent } from '../../components/form/auth-form.component';
 
 @Component({
@@ -18,7 +18,7 @@ import { AuthFormComponent } from '../../components/form/auth-form.component';
 })
 export class RegisterPage {
   registerForm!: FormGroup;
-  registerInputFields!: InputField[];
+  registerInputFields!: IInputField[];
   authRoutesConfig = authRoutesConfig;
   errorMessage = '';
 
