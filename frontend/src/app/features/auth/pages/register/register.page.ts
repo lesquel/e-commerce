@@ -37,9 +37,9 @@ export class RegisterPage {
     });
 
     this.registerInputFields = [
-      { name: 'email', label: 'Email', type: 'text', placeholder: 'Enter your email' },
-      { name: 'username', label: 'Username', type: 'text', placeholder: 'Enter your username' },
-      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password' },
+      { name: 'email', label: 'Email', type: 'text', placeholder: 'Enter your email', autocomplete:"email" },
+      { name: 'username', label: 'Username', type: 'text', placeholder: 'Enter your username', autocomplete:"username" },
+      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password', autocomplete:"new-password" },
     ];
 
   }

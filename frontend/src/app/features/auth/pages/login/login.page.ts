@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { authRoutesConfig } from '../../config';
 import { IInputField } from '@app/shared/types';
 import { AuthFormComponent } from '../../components/form/auth-form.component';
+import { Router } from 'express';
 
 @Component({
   selector: 'login-page',
@@ -39,8 +40,8 @@ export class LoginPage {
     });
 
     this.loginFormInputFields = [
-      { name: 'identifier', label: 'Email or username', type: 'text', placeholder: 'Enter your email or username' },
-      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password' },
+      { name: 'identifier', label: 'Email or username', type: 'text', placeholder: 'Enter your email or username',autocomplete:'email' },
+      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password', autocomplete:'current-password' },
     ]
 
   }
@@ -56,6 +57,7 @@ export class LoginPage {
       .subscribe({
         next: () => {
           this.errorMessage = '';
+
         },
         error: (error) => {
           this.errorMessage = error.message || 'Login failed';

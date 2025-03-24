@@ -29,6 +29,7 @@ export class AuthService {
         map((response: any) => {
           const adaptedUser = userAdapter(response);
           this.userService.saveUser(adaptedUser);
+          console.log('Nahifasd')
           this.router.navigate(['/']);
           localStorage.setItem('user', JSON.stringify(adaptedUser.jwt));
           return adaptedUser;

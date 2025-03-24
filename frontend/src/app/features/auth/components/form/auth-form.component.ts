@@ -18,6 +18,9 @@ export class AuthFormComponent {
 
   @Output() formSubmit = new EventEmitter<void>();
 
+  showPassword = false;  
+
+
 
   OnSubmit(){
     if (this.formGroup.valid){
@@ -26,7 +29,9 @@ export class AuthFormComponent {
   }
 
 
-
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   getErrorMessage(field: IInputField) {
     return ErrorHandler.getErrorMessage(this.formGroup, field.name)
