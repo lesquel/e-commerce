@@ -1,6 +1,5 @@
-import { IRoute } from "@app/shared/types";
 
-export const authRoutesConfig: Record<string, IRoute> = {
+export const authRoutesConfig = {
   auth: {
     path: 'auth',
     url: '/auth',
