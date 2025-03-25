@@ -1,44 +1,63 @@
-import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { LucideAngularModule, Moon, Sun } from 'lucide-angular';
 
 type Theme = 'light' | 'dark';
 
 @Component({
   selector: 'app-theme-controller',
-  imports: [],
+  imports: [LucideAngularModule, CommonModule],
   templateUrl: './theme-controller.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeControllerComponent {
+export class ThemeControllerComponent implements OnInit {
   private $body = inject(DOCUMENT).body;
   private platformId = inject(PLATFORM_ID);
+
+  readonly sun = Sun;
+  readonly moon = Moon;
+
+  constructor() {}
+
+  ngOnInit() {
+    this.setAtribute(this.getTheme());
+  }
+
+  
   getAtribute(): Theme {
     return (this.$body.getAttribute('data-theme') as Theme) || 'light';
   }
 
-  setAtribute(value: Theme) {
+  
+  setAtribute(value: Theme): void {
     this.$body.setAttribute('data-theme', value);
+    this.setTheme(value); 
   }
 
-  getTheme() : Theme {
+  
+  getTheme(): Theme {
     if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem('theme') as Theme || 'light';
+      return (localStorage.getItem('theme') as Theme) || 'light';
     }
     return 'light';
   }
 
-  setTheme(value: Theme) {
-    localStorage.setItem('theme', value);
+  
+  setTheme(value: Theme): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('theme', value);
+    }
   }
 
-  toggleTheme() {
-    const theme = this.getAtribute();
-    const newTheme: Theme = theme === 'light' ? 'dark' : 'light';
-    this.setAtribute(newTheme);
-    this.setTheme(newTheme);
+  
+  get themeIcon() {
+    return this.getTheme() === 'light' ? this.sun : this.moon;
   }
 
-  constructor() {
-    this.setAtribute(this.getTheme());
+  
+  toggleTheme(): void {
+    const currentTheme = this.getAtribute();
+    const newTheme: Theme = currentTheme === 'light' ? 'dark' : 'light';
+    this.setAtribute(newTheme); 
   }
 }

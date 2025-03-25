@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IInputField } from '@app/shared/types';
 import { ErrorHandler } from '@app/shared/utils/getErrorMessage';
+import { LucideAngularModule, EyeIcon, EyeOff } from 'lucide-angular';
+
 
 @Component({
   selector: 'app-auth-form',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './auth-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -18,12 +20,20 @@ export class AuthFormComponent {
 
   @Output() formSubmit = new EventEmitter<void>();
 
-  showPassword = false;  
+  showPassword = false;
+
+  readonly eyeIcon = EyeIcon
+  readonly eyeOff = EyeOff
+
+
+  get passwordVisibilityIcon() {
+    return this.showPassword ? this.eyeIcon : this.eyeOff
+  }
 
 
 
-  OnSubmit(){
-    if (this.formGroup.valid){
+  OnSubmit() {
+    if (this.formGroup.valid) {
       this.formSubmit.emit()
     }
   }

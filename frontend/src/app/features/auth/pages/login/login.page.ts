@@ -9,7 +9,7 @@ import { AuthService } from '../../services';
 import { RouterLink } from '@angular/router';
 import { authRoutesConfig } from '../../config';
 import { IInputField } from '@app/shared/types';
-import { AuthFormComponent } from '../../components/form/auth-form.component';
+import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
 import { Router } from 'express';
 
 @Component({
