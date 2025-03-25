@@ -8,11 +8,13 @@ import { ImageService } from '../../../shared/services';
 import { UserService } from './user.service';
 import { authRoutesConfig } from '../config';
 
+import { environment } from '@environments/environment.development';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:1337/';
+  private baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
   private router = inject(Router);
   private userService = inject(UserService);
@@ -29,7 +31,6 @@ export class AuthService {
         map((response: any) => {
           const adaptedUser = userAdapter(response);
           this.userService.saveUser(adaptedUser);
-          console.log('Nahifasd')
           this.router.navigate(['/']);
           localStorage.setItem('user', JSON.stringify(adaptedUser.jwt));
           return adaptedUser;
