@@ -7,9 +7,7 @@ import { SiteService } from './services';
   selector: 'site-layout',
   imports: [RouterOutlet],
   template: `
-    <main class="min-h-screen">
       <router-outlet />
-    </main>
   `,
 })
 export class SiteLayout implements OnInit {

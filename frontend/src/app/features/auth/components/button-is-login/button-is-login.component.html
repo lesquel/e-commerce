@@ -2,6 +2,6 @@
     <app-avatar></app-avatar>
 </ng-container>
 <ng-container *ngIf="!isAuthenticated">
-    <a class="btn btn-outline" [routerLink]="[authRoutesConfig.login.url]">Login</a>
-    <a class="btn hover:btn-neutral" [routerLink]="[authRoutesConfig.register.url]">Register</a>
+    <a class="btn btn-outline" [routerLink]="[authRoutesConfig.children.login.url]">Login</a>
+    <a class="btn hover:btn-neutral" [routerLink]="[authRoutesConfig.children.register.url]">Register</a>
 </ng-container>
