@@ -1,0 +1,1 @@
+export type { ShoppingCart } from './shopping-cart.model';

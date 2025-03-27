@@ -1,6 +1,6 @@
 export interface Image {
   id: number;
-  name: 'daviddoe@strapi';
+  name: string;
   url: string;
   thumbnail?: string;
   medium?: string;

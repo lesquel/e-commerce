@@ -31,7 +31,7 @@ export class ImageService {
       );
   }
 
-  linkImagetoEntry(
+  linkImagetoEntity(
     urlApi: string,
     imageId: number,
     documentIdEntity: string,
