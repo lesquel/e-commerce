@@ -10,26 +10,17 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
-<<<<<<< HEAD
   imports: [
     ButtonIsLoginComponent,
     ThemeControllerComponent,
     ShoppingCartButtonComponent,
     RouterLink,
+    MatIconModule,
   ],
   templateUrl: './navbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent {}
-=======
-  imports: [RouterLink,MatIconModule,ButtonIsLoginComponent, ThemeControllerComponent],
-  templateUrl: './navbar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
 export class NavbarComponent {
-  siteRoutesConfig = siteRoutesConfig
-  productsRoutesConfig = productsRoutesConfig
-
-
+  siteRoutesConfig = siteRoutesConfig;
+  productsRoutesConfig = productsRoutesConfig;
 }
->>>>>>> d606bd601c6aa41f41deb149e0144e97c34696ee

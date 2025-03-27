@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_carts",
+  "info": {
+    "singularName": "product-cart",
+    "pluralName": "product-carts",
+    "displayName": "ProductCart"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "shopping_carts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::shopping-cart.shopping-cart",
+      "inversedBy": "product_carts"
+    }
+  }
+}

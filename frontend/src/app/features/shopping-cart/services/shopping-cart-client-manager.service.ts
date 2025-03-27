@@ -6,12 +6,17 @@ import { ShoppingCart } from '../models';
 import { createFilterId } from '@app/shared/utils';
 import { UserService } from '@app/features/auth/services';
 
+// getShoppingCarts ?populate[product_carts][populate]=product&populate=user  
+// || http://localhost:1337/api/shopping-carts/inrfdgkz5uf6jf378nir2hkv?populate[product_carts][populate]=product&populate=user
+
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartClientManagerService {
   private http = inject(HttpClient);
-  private baseUrl = environment.apiUrl;
+  private baseUrl = environment.baseApiUrl;
   private userService = inject(UserService);
   private user = this.userService.getUser();
 
@@ -19,7 +24,7 @@ export class ShoppingCartClientManagerService {
     return this.http.get<ShoppingCart[]>(
       `${this.baseUrl}/api/shopping-carts>${createFilterId({
         id: this.user?.id as number,
-        name: "user"
+        name: 'user',
       })}`
     );
   }
