@@ -8,8 +8,13 @@ export const productsRoutesConfig = {
   children: {
     list: {
       path: '',
-      url: '/',
+      url: '/products',
       label: 'Products'
+    },
+    detail: {
+      path: ':documentId',
+      url: '/products/',
+      label: 'Product detail'
     },
 
   }

@@ -15,9 +15,13 @@ export class ProductService {
   private http = inject(HttpClient);
 
 
-  getProducts(): Observable<ApiResponse<Product>> {
-    return this.http.get<ApiResponse<Product>>(this.baseApiUrl + "api/products")
+  productsUrl = `${this.baseApiUrl}api/products/`
+
+  getProducts(): Observable<ApiResponse<Product[]>> {
+    return this.http.get<ApiResponse<Product[]>>(this.productsUrl)
+  }
+  getProductByDocumentId(documentId:string): Observable<ApiResponse<Product>> {
+    return this.http.get<ApiResponse<Product>>(this.productsUrl + documentId)
   }
 
-  constructor() { }
 }

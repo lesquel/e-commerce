@@ -1,18 +1,27 @@
-<div class="card bg-base-100 w-96 shadow-sm">
-    <figure>
-        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
-    </figure>
-    <div class="card-body">
-        <h2 class="card-title">
-            {{product.name}}
-            <div class="badge badge-secondary">NEW</div>
-        </h2>
-        <p>{{product.description}}</p>
-        <div class="card-actions justify-end">
-            <div class="badge badge-outline">Fashion</div>
-            <div class="badge badge-outline">Products</div>
-            <mat-icon>add_shopping_cart</mat-icon>
+<a [routerLink]="[productsRoutesConfig.children.detail.url, product.documentId]">
+    <div class="card bg-base-100 w-full max-w-sm shadow-sm p-4">
+        <figure>
+            <img class="w-full h-auto object-cover"
+                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Product Image" />
+        </figure>
 
+        <div class="card-body">
+            <h2 class="card-title text-lg md:text-xl">
+                {{product.name}}
+                <div class="badge badge-secondary">NEW</div>
+            </h2>
+
+            <div class="card-actions flex justify-between items-center">
+                <div class="flex gap-2">
+                    <div class="badge badge-outline">Fashion</div>
+                    <div class="badge badge-outline">Products</div>
+                </div>
+
+                <button class="btn btn-circle transition-transform transform hover:scale-115"
+                    (click)="addToCart($event)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+            </div>
         </div>
     </div>
-</div>
+</a>
