@@ -1,10 +1,17 @@
 
 export const productsRoutesConfig = {
-    products: {
-      path: 'products',
-      url: '/products',
+  base: {
+    path: 'products',
+    url: '/products',
+    label: 'Products'
+  },
+  children: {
+    list: {
+      path: '',
+      url: '/',
       label: 'Products'
     },
 
-  };
-  
+  }
+
+};

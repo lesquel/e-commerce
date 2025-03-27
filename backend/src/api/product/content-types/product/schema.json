@@ -19,11 +19,14 @@
       "type": "text",
       "maxLength": 200
     },
-    "amount": {
+    "stock": {
       "type": "integer"
     },
-    "individualPrice": {
-      "type": "decimal"
+    "prices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::price.price",
+      "mappedBy": "product"
     }
   }
 }

@@ -1,21 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { LucideAngularModule, Moon, Sun } from 'lucide-angular';
+import { MatIconModule } from '@angular/material/icon';
 
 type Theme = 'light' | 'dark';
 
 @Component({
   selector: 'app-theme-controller',
-  imports: [LucideAngularModule, CommonModule],
+  imports: [MatIconModule, CommonModule],
   templateUrl: './theme-controller.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeControllerComponent implements OnInit {
   private $body = inject(DOCUMENT).body;
   private platformId = inject(PLATFORM_ID);
-
-  readonly sun = Sun;
-  readonly moon = Moon;
 
   constructor() {}
 
@@ -51,7 +48,7 @@ export class ThemeControllerComponent implements OnInit {
 
   
   get themeIcon() {
-    return this.getTheme() === 'light' ? this.sun : this.moon;
+    return this.getTheme() === 'light' ? 'light_mode' :'dark_mode';
   }
 
   

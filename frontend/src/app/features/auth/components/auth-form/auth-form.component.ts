@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { IInputField } from '@app/shared/types';
 import { ErrorHandler } from '@app/shared/utils/getErrorMessage';
-import { LucideAngularModule, EyeIcon, EyeOff } from 'lucide-angular';
 
 
 @Component({
   selector: 'app-auth-form',
-  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './auth-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -22,12 +22,10 @@ export class AuthFormComponent {
 
   showPassword = false;
 
-  readonly eyeIcon = EyeIcon
-  readonly eyeOff = EyeOff
 
 
   get passwordVisibilityIcon() {
-    return this.showPassword ? this.eyeIcon : this.eyeOff
+    return this.showPassword ? 'visibility' : 'visibility_off'
   }
 
 

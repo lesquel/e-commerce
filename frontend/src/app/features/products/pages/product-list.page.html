@@ -1,0 +1,7 @@
+<ng-container *ngIf="productsList; else noProducts">
+    <app-product-card *ngFor="let product of productsList; trackBy productById" [product]="product"></app-product-card>
+</ng-container>
+
+<ng-template #noProducts>
+    <p>NO PRODUCTS</p>
+</ng-template>
