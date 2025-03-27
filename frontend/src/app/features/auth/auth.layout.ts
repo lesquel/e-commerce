@@ -6,11 +6,7 @@ import { NavbarComponent } from '@shared/components';
   selector: 'app-auth-layout',
   imports: [RouterOutlet],
   template: `
-    <div class="container">
-      <main class="min-h-screen">
         <router-outlet></router-outlet>
-      </main>
-    </div>
   `,
 })
-export class AuthLayout {}
+export class AuthLayout { }

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeroHomeComponent } from '../components/home/hero-home/hero-home.component';
 import { RouterLink } from '@angular/router';
+import { ProductService } from '@app/features/products/services/product.service';
 
 @Component({
   selector: 'home-page',
@@ -14,4 +15,12 @@ import { RouterLink } from '@angular/router';
     <a [routerLink]="['/teams']" routerLinkActive="router-link-active"> </a>
   `,
 })
-export class HomePage {}
+export class HomePage  {
+  productService = inject(ProductService)
+
+  ngOnInit(){
+    this.productService.getProducts().subscribe(products => {console.log(products); console.log('SKSKSKSK')})
+    
+  }
+  
+}

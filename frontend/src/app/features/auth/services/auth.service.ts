@@ -14,7 +14,7 @@ import { environment } from '@environments/index';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = environment.apiUrl;
+  private baseApiUrl = environment.baseApiUrl;
   private http = inject(HttpClient);
   private router = inject(Router);
   private userService = inject(UserService);
@@ -23,7 +23,7 @@ export class AuthService {
 
   login(identifier: string, password: string): Observable<User> {
     return this.http
-      .post<User>(this.baseUrl + 'api/auth/local/', {
+      .post<User>(this.baseApiUrl + 'api/auth/local/', {
         identifier,
         password,
       })
@@ -47,7 +47,7 @@ export class AuthService {
   me(user: User): Observable<User> {
     const jwt = user.jwt;
     return this.http
-      .get<User>(this.baseUrl + 'api/users/me', {
+      .get<User>(this.baseApiUrl + 'api/users/me', {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
@@ -72,7 +72,7 @@ export class AuthService {
     password: string;
   }): Observable<User> {
     return this.http
-      .post<User>(`${this.baseUrl}api/auth/local/register`, {
+      .post<User>(`${this.baseApiUrl}api/auth/local/register`, {
         email,
         username,
         password,
@@ -110,7 +110,7 @@ export class AuthService {
     }
     return this.http
       .put<User>(
-        `${this.baseUrl}api/users/${_user.id}`,
+        `${this.baseApiUrl}api/users/${_user.id}`,
         { username, email },
         {
           headers: {
@@ -122,7 +122,7 @@ export class AuthService {
         map((user) => {
           const userUpdated = userAdapter({ user: user, jwt });
           this.userService.saveUser(userUpdated);
-          this.router.navigate([authRoutesConfig.me.url]);
+          this.router.navigate([authRoutesConfig.children.me.url]);
           return userUpdated;
         }),
         catchError((error) => {

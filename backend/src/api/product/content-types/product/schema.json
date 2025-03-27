@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product"
+    "displayName": "Product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,11 +19,14 @@
       "type": "text",
       "maxLength": 200
     },
-    "creationDate": {
-      "type": "datetime"
+    "stock": {
+      "type": "integer"
     },
-    "updateDate": {
-      "type": "datetime"
+    "prices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::price.price",
+      "mappedBy": "product"
     }
   }
 }

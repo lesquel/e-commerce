@@ -4,11 +4,11 @@ import { HomePage } from "./pages";
 import { siteRoutesConfig } from "./config";
 export const siteRoutes: Routes = [
     {
-        path: siteRoutesConfig.home.path,
+        path: siteRoutesConfig.base.path,
         component: SiteLayout,
         children: [
             {
-                path: siteRoutesConfig.home.path,
+                path: siteRoutesConfig.base.path,
                 component: HomePage
             }
 

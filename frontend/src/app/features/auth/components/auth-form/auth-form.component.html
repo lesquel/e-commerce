@@ -17,7 +17,9 @@
 
                 <button type="button" (click)="togglePasswordVisibility()" class="absolute right-3 top-3"
                     *ngIf="field.type === 'password'">
-                    <lucide-icon [name]="passwordVisibilityIcon"></lucide-icon> </button>
+                    <mat-icon>{{passwordVisibilityIcon}}</mat-icon>
+
+                </button>
             </div>
         </div>
         <small class="text-secondary" style="font-size: 14px;">

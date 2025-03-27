@@ -1,5 +1,5 @@
 export const siteRoutesConfig = {
-  home: {
+  base: {
     path: '',
     url: '/',
     label: 'Home'
