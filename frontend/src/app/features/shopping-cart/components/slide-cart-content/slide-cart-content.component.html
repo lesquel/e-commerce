@@ -1,14 +1,30 @@
 <dialog id="my_modal_2" class="modal modal-end">
   <div class="modal-box w-full max-w-lg">
     <h3 class="text-lg font-bold">Shopping Cart</h3>
-    <p class="py-4">
+    @if (!user){
+      <p class="h-full flex justify-center items-center">
 
-      
+        <app-button-is-login></app-button-is-login>
+      </p>
+    } @else {
+    <p class="py-4">
+      a
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      a
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      a
     </p>
-    <p>100</p>
-    <p>100</p>
-    <p>100</p>
-    <p>100</p>
+
+    }
   </div>
   <form method="dialog">
     <button class="btn btn-sm btn-circle btn-ghost absolute right-6 top-2">
