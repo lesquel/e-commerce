@@ -12,15 +12,20 @@ import { ProductService } from '@app/features/products/services/product.service'
   ],
   template: `
     <!-- <app-hero-home /> -->
-    <a [routerLink]="['/teams']" routerLinkActive="router-link-active"> </a>
+
+    <!-- Open the modal using ID.showModal() method -->
+    
+
+    <a [routerLink]="['/teams']" routerLinkActive="router-link-active">hola</a>
   `,
 })
-export class HomePage  {
-  productService = inject(ProductService)
+export class HomePage {
+  productService = inject(ProductService);
 
-  ngOnInit(){
-    this.productService.getProducts().subscribe(products => {console.log(products); console.log('SKSKSKSK')})
-    
+  ngOnInit() {
+    this.productService.getProducts().subscribe((products) => {
+      console.log(products);
+      console.log('SKSKSKSK');
+    });
   }
-  
 }

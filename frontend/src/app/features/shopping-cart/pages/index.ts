@@ -1,0 +1,1 @@
+export { ShoppingCartPage } from "./shopping-cart/shopping-cart.page";

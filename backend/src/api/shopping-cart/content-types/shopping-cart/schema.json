@@ -16,11 +16,11 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "productCart": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.product-cart",
-      "required": false
+    "product_carts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product-cart.product-cart",
+      "mappedBy": "shopping_carts"
     }
   }
 }

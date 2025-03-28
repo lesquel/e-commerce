@@ -487,6 +487,39 @@ export interface ApiPricePrice extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProductCartProductCart extends Struct.CollectionTypeSchema {
+  collectionName: 'product_carts';
+  info: {
+    displayName: 'ProductCart';
+    pluralName: 'product-carts';
+    singularName: 'product-cart';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-cart.product-cart'
+    > &
+      Schema.Attribute.Private;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.Integer & Schema.Attribute.Required;
+    shopping_carts: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::shopping-cart.shopping-cart'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -544,7 +577,10 @@ export interface ApiShoppingCartShoppingCart
       'api::shopping-cart.shopping-cart'
     > &
       Schema.Attribute.Private;
-    productCart: Schema.Attribute.Component<'shared.product-cart', true>;
+    product_carts: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::product-cart.product-cart'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1069,6 +1105,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::global.global': ApiGlobalGlobal;
       'api::price.price': ApiPricePrice;
+      'api::product-cart.product-cart': ApiProductCartProductCart;
       'api::product.product': ApiProductProduct;
       'api::shopping-cart.shopping-cart': ApiShoppingCartShoppingCart;
       'plugin::content-releases.release': PluginContentReleasesRelease;
