@@ -11,7 +11,7 @@ import { AvatarNavbarComponent } from './avatar-navbar/avatar-navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonIsLoggedComponent {
-  authRoutesConfig = input<RoutesConfig>()
+  authRoutesConfig = input.required<RoutesConfig>()
 
-  isAuthenticated = input<Boolean>()
+  isAuthenticated = input.required<Boolean>()
 }

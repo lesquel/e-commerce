@@ -12,16 +12,18 @@ import { ShoppingCartLocalManagerService } from '@app/features/shopping-cart';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductCardComponent {
-  @Input() product!: Product;
+  product = input.required<Product>()
+
+
   private shoppingCartLocalManager = inject(ShoppingCartLocalManagerService);
   readonly productsRoutesConfig = productsRoutesConfig
 
 
-  addToCart(event: MouseEvent){
+  addToCart(event: MouseEvent) {
     event.preventDefault()
     event.stopPropagation()
     this.shoppingCartLocalManager.addProductItem({
-      product: this.product,
+      product: this.product()!,
       quantity: 1,
     });
   }

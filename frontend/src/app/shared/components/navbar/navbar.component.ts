@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ShoppingCartButtonComponent } from '@features/shopping-cart/components';
 import { ThemeControllerComponent } from '@app/shared/components/navbar/theme-controller/theme-controller.component';
 import { RouterLink } from '@angular/router';
 
@@ -9,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ButtonIsLoggedComponent } from './button-is-logged/button-is-logged.component';
 import { authRoutesConfig } from '@app/features/auth/config';
 import { UserService } from '@app/features/auth/services';
+import { ShoppingCartButtonComponent } from './shopping-cart-button/shopping-cart-button.component';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +23,7 @@ export class NavbarComponent {
 
   userService = inject(UserService)
 
-  get isAuthenticated(): Boolean{
+  get isAuthenticated(): Boolean {
     return this.userService.isAuthenticated()
   }
 

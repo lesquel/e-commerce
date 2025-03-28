@@ -1,4 +1,4 @@
-<a [routerLink]="[productsRoutesConfig.children.detail.url, product.documentId]">
+<a [routerLink]="[productsRoutesConfig.children.detail.url, product().documentId]">
     <div class="card bg-base-100 w-full max-w-sm shadow-sm p-4">
         <figure>
             <img class="w-full h-auto object-cover"
@@ -7,7 +7,7 @@
 
         <div class="card-body">
             <h2 class="card-title text-lg md:text-xl">
-                {{product.name}}
+                {{product().name}}
                 <div class="badge badge-secondary">NEW</div>
             </h2>
 

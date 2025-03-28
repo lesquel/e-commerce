@@ -16,7 +16,7 @@ import { AvatarComponent } from '../../../avatar/avatar.component';
 export class AvatarNavbarComponent {
   private userService = inject(UserService);
 
-  authRoutesConfig = input<RoutesConfig>()
+  authRoutesConfig = input.required<RoutesConfig>()
 
   logout() {
     this.userService.logout();
