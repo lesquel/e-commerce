@@ -34,13 +34,9 @@
       </li>
     </ul>
   </div>
-<<<<<<< HEAD
   <div class="navbar-end">
     <app-shopping-cart-button />
-=======
-  <div class="navbar-end gap-2">
->>>>>>> d606bd601c6aa41f41deb149e0144e97c34696ee
-    <app-button-is-login />
+    <app-button-is-logged [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated"/>
     <app-theme-controller />
   </div>
 </div>
