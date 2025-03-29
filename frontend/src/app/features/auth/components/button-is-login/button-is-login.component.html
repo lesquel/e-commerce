@@ -1,9 +1,0 @@
-<ng-container *ngIf="isAuthenticated">
-    <app-avatar></app-avatar>
-</ng-container>
-<ng-container *ngIf="!isAuthenticated">
-    <div class="flex gap-1">
-        <a class="btn btn-outline" [routerLink]="[authRoutesConfig.children.login.url]">Login</a>
-        <a class="btn hover:btn-neutral" [routerLink]="[authRoutesConfig.children.register.url]">Register</a>
-    </div>
-</ng-container>

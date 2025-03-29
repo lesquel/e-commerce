@@ -20,12 +20,8 @@ import { ProductService } from '@app/features/products/services/product.service'
   `,
 })
 export class HomePage {
-  productService = inject(ProductService);
 
   ngOnInit() {
-    this.productService.getProducts().subscribe((products) => {
-      console.log(products);
-      console.log('SKSKSKSK');
-    });
+
   }
 }

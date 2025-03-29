@@ -8,7 +8,7 @@ import { ImageService } from '../../../shared/services';
 import { UserService } from './user.service';
 import { authRoutesConfig } from '../config';
 
-import { environment } from '@environments/index';
+import { environment } from '@environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
