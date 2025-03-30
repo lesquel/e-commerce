@@ -1,5 +1,9 @@
 <app-navbar />
+
+
 <main class="min-h-screen">
     <router-outlet />
 </main>
+<app-notification [showNotification]="showAlert" [notificationMessage]="message"
+    [notificationType]="notificationType"></app-notification>
 <app-footer />
