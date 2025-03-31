@@ -21,7 +21,6 @@ export class ProductListPage {
     ngOnInit() {
         this.productService.getProducts().subscribe(products => {
             this.productsList = products.data;
-            console.log(this.productsList)
             this.loading = false;
         }
         )

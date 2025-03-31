@@ -12,21 +12,24 @@ import { ShoppingCartButtonComponent } from './shopping-cart-button/shopping-car
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, MatIconModule, ButtonIsLoggedComponent, ThemeControllerComponent, ShoppingCartButtonComponent],
+  imports: [
+    RouterLink,
+    MatIconModule,
+    ButtonIsLoggedComponent,
+    ThemeControllerComponent,
+    ShoppingCartButtonComponent,
+  ],
   templateUrl: './navbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  siteRoutesConfig = siteRoutesConfig
-  authRoutesConfig = authRoutesConfig
-  productsRoutesConfig = productsRoutesConfig
+  siteRoutesConfig = siteRoutesConfig;
+  authRoutesConfig = authRoutesConfig;
+  productsRoutesConfig = productsRoutesConfig;
 
-  userService = inject(UserService)
+  userService = inject(UserService);
 
   get isAuthenticated(): Boolean {
-    return this.userService.isAuthenticated()
+    return this.userService.isAuthenticated();
   }
-
-
-
 }

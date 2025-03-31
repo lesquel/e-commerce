@@ -1,0 +1,19 @@
+@let productItemLocal = productItem().product;
+<li class="flex items-center gap-4 px-4 py-3">
+  <div class="flex items-center self-center shrink-0">
+    <img
+      src="https://tailwindmix.b-cdn.net/products/product-shoe-01.jpeg"
+      alt="product image"
+      class="w-8 rounded"
+    />
+  </div>
+
+  <div
+    class="flex flex-col gap-0 min-h-[2rem] items-start justify-center flex-1 min-w-0"
+  >
+    <h4 class="w-full text-base truncate text-slate-700">
+      {{ productItemLocal.name }}
+    </h4>
+  </div>
+  <div class="text-xs text-slate-400">{{ productItemLocal.amount }}</div>
+</li>

@@ -1,11 +1,8 @@
-export interface Product {
-    id: string
-    documentId: string
+import { InfoBasicEntity } from "@app/shared/models"
+
+export interface Product extends InfoBasicEntity {
     name: string
     description:string
     amount: number
     individualPrice: number
-    createdAt: Date
-    updatedAt: Date
-
 }

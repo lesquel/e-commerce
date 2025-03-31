@@ -1,88 +1,117 @@
-import { Injectable, signal, Signal } from '@angular/core';
+import { computed, inject, Injectable, signal, Signal } from '@angular/core';
 import { ProductCart, ShoppingCartLocal } from '../models';
+import { UserService } from '@app/features/auth/services';
+import { User } from '@app/features/auth/models';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartLocalManagerService {
   dataCartSignal = signal<ShoppingCartLocal | null>(null);
+  private userService = inject(UserService);
+  private user = this.userService.getUser();
+
+  constructor() {
+    this.loadShoppingCartStore();
+  }
+
+  // Asegurar que product_carts siempre sea un Map<string, ProductCart>
+  private productItems = computed(() => {
+    const productCarts = this.dataCartSignal()?.product_carts;
+    return productCarts instanceof Map
+      ? productCarts
+      : new Map<string, ProductCart>(Object.entries(productCarts ?? {}));
+  });
+
+  productItemsAsArray = computed(() => {
+    return Array.from(this.productItems().values()).map((p : any) => {
+      const productCart = p[1] as ProductCart;
+      return { quantity: productCart.quantity, product: productCart.product };
+    });
+  });
 
   // Verificación si estamos en el navegador
-  private isBrowser: boolean = typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  private isBrowser: boolean =
+    typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
 
   getShoppingCart(): Signal<ShoppingCartLocal | null> {
     return this.dataCartSignal;
   }
 
-  private getProductItems(): Map<string, ProductCart> | null {
-    return this.dataCartSignal()?.product_carts ?? null;
-  }
-
   private getProductCart(productId: string): ProductCart | null {
-    return this.getProductItems()?.get(productId) ?? null;
+    return this.productItems().get(productId) ?? null;
   }
 
   changeProductQuantity(productId: string, quantity: number): void {
     this.dataCartSignal.update((oldValue: ShoppingCartLocal | null) => {
       if (!oldValue) return null;
-      const updatedProductCarts = this.getProductItems();
-      if (!updatedProductCarts) return oldValue;
+      const updatedProductCarts = new Map<string, ProductCart>(
+        this.productItems()
+      );
       const productCart = updatedProductCarts.get(productId);
       if (!productCart) return oldValue;
       updatedProductCarts.set(productId, { ...productCart, quantity });
+
       return {
         ...oldValue,
         product_carts: updatedProductCarts,
       };
     });
+
+    this.saveShoppingCartStore();
   }
 
   addProductItem(productCart: ProductCart): void {
-
-    console.log(this.getProductItems());
-    if (this.getProductCart(productCart.product.id)) {
-      const productCartLocal = this.getProductCart(productCart.product.id) as ProductCart;
+    console.log('addProductItem', this.getProductCart(productCart.product.documentId));
+    if (this.getProductCart(productCart.product.documentId)) {
+      const productCartLocal = this.getProductCart(
+        productCart.product.documentId
+      ) as ProductCart;
       this.changeProductQuantity(
-        productCart.product.id,
+        productCart.product.documentId,
         productCartLocal.quantity + 1
       );
-      console.log('product added');
       this.saveShoppingCartStore();
       return;
     }
 
     this.dataCartSignal.update((oldValue) => {
-      if (!oldValue) {
-        const newProducts = new Map<string, ProductCart>();
-        newProducts.set(productCart.product.id, productCart);
-        return {
-          createdAt: new Date(),
-          user: {
-            id: 1,
-            createdAt: '2025-03-09T21:42:51.458Z',
-            documentId: 'nrojnfjn',
-            email: 'lesqu@gmail.com',
-            username: 'lesqu',
-            jwt: 'jj3d3i',
-            avatar: 'https://i.pravatar.cc/150?img=1',
-          },
-          product_carts: newProducts,
-          id: 1,
-          updatedAt: new Date(),
-          documentId: 'nrojnfjn',
-        };
-      }
-
-      const updatedProducts = new Map(oldValue.product_carts);
-      updatedProducts.set(productCart.product.id, productCart);
+      const updatedProducts = new Map<string, ProductCart>(
+        oldValue?.product_carts instanceof Map ? oldValue.product_carts : []
+      );
+      updatedProducts.set(productCart.product.documentId, productCart);
 
       return {
-        ...oldValue,
-        product_carts: updatedProducts,
+        user: this.user as User,
+        id: oldValue?.id ?? 1,
+        createdAt: oldValue?.createdAt ?? new Date(),
         updatedAt: new Date(),
+        documentId: oldValue?.documentId ?? 'nrojnfjn',
+        product_carts: updatedProducts,
       };
     });
 
-    // Solo guarda en localStorage si estamos en el navegador
+    this.saveShoppingCartStore();
+  }
+
+  deleteProductItem(productId: string): void {
+    this.dataCartSignal.update((oldValue: ShoppingCartLocal | null) => {
+      if (!oldValue) return null;
+      const updatedProductCarts = new Map<string, ProductCart>(
+        this.productItems()
+      );
+      updatedProductCarts.delete(productId);
+
+      return {
+        ...oldValue,
+        product_carts: updatedProductCarts,
+      };
+    });
+
+    this.saveShoppingCartStore();
+  }
+
+  saveShoppingCartStore(): void {
     if (this.isBrowser) {
       const cartData = this.dataCartSignal();
       const serializableCart = {
@@ -90,32 +119,19 @@ export class ShoppingCartLocalManagerService {
         product_carts: Array.from(cartData?.product_carts?.entries() ?? []),
       };
 
-      this.saveShoppingCartStore();
-      console.log(localStorage.getItem('shoppingCart'));
+      localStorage.setItem('shoppingCart', JSON.stringify(serializableCart));
     }
   }
 
-  deleteProductItem(productId: string): void {
-    this.dataCartSignal.update((oldValue: ShoppingCartLocal | null) => {
-      if (!oldValue) return null;
-      const updatedProductCarts = this.getProductItems();
-      if (!updatedProductCarts) return oldValue;
-      updatedProductCarts.delete(productId);
-      return {
-        ...oldValue,
-        product_carts: updatedProductCarts,
-      };
-    });
+  loadShoppingCartStore(): void {
+    if (!this.isBrowser) return;
+    const shoppingCart = localStorage.getItem('shoppingCart');
+    if (!shoppingCart) return;
 
-    if (this.isBrowser) {
-      localStorage.setItem('shoppingCart', JSON.stringify(this.dataCartSignal()));
-    }
-  }
+    const parsedCart = JSON.parse(shoppingCart) as ShoppingCartLocal;
+    console.log('parsedCart', parsedCart.product_carts);
 
-  saveShoppingCartStore(): void {
-    if (this.isBrowser) {
-      localStorage.setItem('shoppingCart', JSON.stringify(this.dataCartSignal()));
-    }
+    this.dataCartSignal.set(parsedCart);
   }
 
   deleteShoppingCartStore(): void {
