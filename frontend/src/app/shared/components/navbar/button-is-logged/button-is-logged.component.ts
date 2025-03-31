@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component,input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NotificationType, RoutesConfig } from '@app/shared/types';
+import { RoutesConfig } from '@app/shared/types';
 import { AvatarNavbarComponent } from './avatar-navbar/avatar-navbar.component';
-import { NotificationsService } from '@app/shared/services/notifications.service';
 
 @Component({
   selector: 'app-button-is-logged',
@@ -14,10 +13,11 @@ import { NotificationsService } from '@app/shared/services/notifications.service
 export class ButtonIsLoggedComponent {
   authRoutesConfig = input.required<RoutesConfig>()
 
-  isAuthenticated = input.required<Boolean>()
+  isAuthenticated = input.required<Boolean|null>()
 
 
-  
+
+
 }
 
 

@@ -9,6 +9,7 @@ import { UserService } from './user.service';
 import { authRoutesConfig } from '../config';
 
 import { environment } from '@environments/environment.development';
+import { siteRoutesConfig } from '@app/features/site';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,9 @@ export class AuthService {
         map((response: any) => {
           const adaptedUser = userAdapter(response);
           this.userService.saveUser(adaptedUser);
-          this.router.navigate(['/']);
+          console.log('WE ARE IN LOGIN')
+          this.router.navigate([siteRoutesConfig.base.url]);
+          console.log('IT SHOULD HAVE REDIRECTED BY NOW')
           localStorage.setItem('user', JSON.stringify(adaptedUser.jwt));
           return adaptedUser;
         }),

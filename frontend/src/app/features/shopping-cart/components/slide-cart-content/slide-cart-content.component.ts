@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { UserService } from '@app/features/auth/services';
 import { ButtonIsLoggedComponent } from '@app/shared/components/navbar/button-is-logged/button-is-logged.component';
 import { RoutesConfig } from '@app/shared/types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-slide-cart-content',
@@ -14,5 +15,6 @@ export class SlideCartContentComponent {
 
   authRoutesConfig = input.required<RoutesConfig>()
 
-  isAuthenticated = input.required<Boolean>()
+  isAuthenticated = input.required<Boolean | null>()
+
 }

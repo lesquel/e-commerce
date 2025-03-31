@@ -20,5 +20,5 @@ import { SlideCartContentComponent } from '@features/shopping-cart/components/sl
 export class ShoppingCartButtonComponent {
   authRoutesConfig = input.required<RoutesConfig>()
 
-  isAuthenticated = input.required<Boolean>()
+  isAuthenticated = input.required<Boolean|null>()
 }
