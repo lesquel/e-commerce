@@ -1,6 +1,6 @@
 import { RoutesConfig } from "@app/shared/types";
 
-export const siteRoutesConfig: RoutesConfig = {
+export const siteRoutesConfig = {
   base: {
     path: '',
     url: '/',

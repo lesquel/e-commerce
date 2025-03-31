@@ -6,6 +6,9 @@ import { Product } from '../../models';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ProductCardSkeletonComponent } from '../../components';
+import { NotificationsService } from '@app/shared/services/notifications.service';
+import { error } from 'console';
+import { NotificationType } from '@app/shared/types';
 
 @Component({
     selector: 'product-list-page',
@@ -16,15 +19,23 @@ export class ProductListPage {
     private subscription!: Subscription;
 
     productService = inject(ProductService)
+    notificationsService = inject(NotificationsService)
+
     productsList!: Product[]
     loading = true
+
     ngOnInit() {
-        this.productService.getProducts().subscribe(products => {
-            this.productsList = products.data;
-            console.log(this.productsList)
-            this.loading = false;
-        }
-        )
+        this.productService.getProducts().subscribe({
+            next: products => {
+                this.productsList = products.data;
+                console.log(this.productsList)
+                this.loading = false;
+            },
+            error: (error) => {
+                this.notificationsService.showAlert('Error getting the products', NotificationType.AlertError)
+            }
+
+        })
     }
 
     productByDocumentId(index: number, product: Product) {

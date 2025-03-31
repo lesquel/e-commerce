@@ -13,15 +13,15 @@ export class ErrorHandler {
       if (control.hasError('email')) {
         return 'This must be an email.';
       }
-      
+
       if (control.hasError('minlength')) {
         return `Minimum length is ${control.getError('minlength').requiredLength} characters.`;
       }
-      if (control.hasError('maxLength')) {
-        return `Maximun length is ${control.getError('maxLength').requiredLength} characters.`;
+      if (control.hasError('maxlength')) {
+        return `Maximun length is ${control.getError('maxlength').requiredLength} characters.`;
       }
       if (control.hasError('min')) {
-        return 'Value must be greater than 0.';
+        return `Value must be greater than ${control.getError('min').requiredLength}`;
       }
       if (control.hasError('noNumbers')) {
         return 'This field cannot contain numbers.';
