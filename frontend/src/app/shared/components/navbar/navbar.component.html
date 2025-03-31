@@ -35,8 +35,8 @@
     </ul>
   </div>
   <div class="navbar-end">
-    <app-shopping-cart-button [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated" />
-    <app-button-is-logged [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated"/>
+    <app-shopping-cart-button [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated$ | async" />
+    <app-button-is-logged [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated$ |async" />
     <app-theme-controller />
   </div>
 </div>

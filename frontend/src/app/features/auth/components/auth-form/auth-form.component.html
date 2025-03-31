@@ -3,7 +3,7 @@
     <legend class="fieldset-legend">{{title}}</legend>
 
     <div *ngFor="let field of inputFields">
-        <div class="">
+        <div>
 
             <label class="fieldset-label">{{field.label}}</label>
 
@@ -15,11 +15,22 @@
                     [autocomplete]="field.autocomplete" class="input" />
 
 
-                <button type="button" (click)="togglePasswordVisibility()" class="absolute right-3 top-3"
-                    *ngIf="field.type === 'password'">
-                    <mat-icon>{{passwordVisibilityIcon}}</mat-icon>
+                @if (field.type === 'password') {
 
-                </button>
+
+                <!-- 
+                <button type="button" (click)="togglePasswordVisibility()" class="absolute right-3 top-3">
+                    <mat-icon>{{passwordVisibilityIcon}}</mat-icon>
+                </button> -->
+
+                <label class="swap absolute right-3 top-3">
+                    <input type="checkbox" [value]="showPassword" (change)="togglePasswordVisibility()" />
+                    <mat-icon class="swap-on">visibility</mat-icon>
+                    <mat-icon class="swap-off">visibility_off</mat-icon>
+                </label>
+
+                }
+
             </div>
         </div>
         <small class="text-secondary" style="font-size: 14px;">
@@ -30,4 +41,7 @@
     <button class="btn btn-neutral mt-4" type="submit" [disabled]="formGroup.invalid">
         {{btnSubmitLabel}}
     </button>
+
+
+
 </form>

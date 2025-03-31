@@ -1,7 +1,9 @@
 import { Routes } from "@angular/router";
 import { AuthLayout } from "./auth.layout";
 import { EditPage, LoginPage, RegisterPage, MePage } from "./pages";
-import {authRoutesConfig} from "./config";
+import { authRoutesConfig } from "./config";
+import { isLoggedGuard } from "./guards/is-Logged.guard";
+import { isNotLoggedGuard } from "./guards/is-not-Logged.guard";
 
 
 
@@ -12,19 +14,19 @@ export const authRoutes: Routes = [
         children: [
             {
                 path: authRoutesConfig.children.login.path,
-                component: LoginPage
+                component: LoginPage, canActivate: [isLoggedGuard]
             },
             {
                 path: authRoutesConfig.children.register.path,
-                component: RegisterPage
+                component: RegisterPage, canActivate: [isLoggedGuard]
             },
             {
                 path: authRoutesConfig.children.me.path,
-                component: MePage
+                component: MePage, canActivate: [isNotLoggedGuard]
             },
             {
                 path: authRoutesConfig.children.edit.path,
-                component: EditPage
+                component: EditPage, canActivate: [isNotLoggedGuard]
             }
         ]
     },

@@ -9,6 +9,8 @@ import { ButtonIsLoggedComponent } from './button-is-logged/button-is-logged.com
 import { authRoutesConfig } from '@app/features/auth/config';
 import { UserService } from '@app/features/auth/services';
 import { ShoppingCartButtonComponent } from './shopping-cart-button/shopping-cart-button.component';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',

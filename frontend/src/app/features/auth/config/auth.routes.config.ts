@@ -1,6 +1,6 @@
 import { RoutesConfig } from "@app/shared/types";
 
-export const authRoutesConfig: RoutesConfig = {
+export const authRoutesConfig = {
   base: {
     path: 'auth',
     url: '/auth',

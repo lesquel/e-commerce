@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component,input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RoutesConfig } from '@app/shared/types';
@@ -13,5 +13,11 @@ import { AvatarNavbarComponent } from './avatar-navbar/avatar-navbar.component';
 export class ButtonIsLoggedComponent {
   authRoutesConfig = input.required<RoutesConfig>()
 
-  isAuthenticated = input.required<Boolean>()
+  isAuthenticated = input.required<Boolean|null>()
+
+
+
+
 }
+
+

@@ -3,14 +3,16 @@ import {
   FormGroup,
   FormControl,
   Validators,
+  FormBuilder,
 } from '@angular/forms';
 import { AlertComponent } from '@shared/components/alert/alert.component';
 import { AuthService } from '../../services';
 import { RouterLink } from '@angular/router';
 import { authRoutesConfig } from '../../config';
-import { IInputField } from '@app/shared/types';
+import { IInputField, NotificationType } from '@app/shared/types';
 import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
 import { Router } from 'express';
+import { NotificationsService } from '@app/shared/services/notifications.service';
 
 @Component({
   selector: 'login-page',
@@ -27,6 +29,9 @@ export class LoginPage {
 
 
   authSevice = inject(AuthService);
+  notificationsService = inject(NotificationsService)
+  private fb = inject(FormBuilder);
+
 
 
   ngOnInit() {
@@ -34,14 +39,14 @@ export class LoginPage {
   }
 
   initLoginForm() {
-    this.loginForm = new FormGroup({
-      identifier: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+    this.loginForm = this.fb.group({
+      identifier: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
 
     this.loginFormInputFields = [
-      { name: 'identifier', label: 'Email or username', type: 'text', placeholder: 'Enter your email or username',autocomplete:'email' },
-      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password', autocomplete:'current-password' },
+      { name: 'identifier', label: 'Email or username', type: 'text', placeholder: 'Enter your email or username', autocomplete: 'email' },
+      { name: 'password', label: 'Password', type: 'password', placeholder: 'Enter your password', autocomplete: 'current-password' },
     ]
 
   }
@@ -49,18 +54,21 @@ export class LoginPage {
   login() {
     if (!this.loginForm.valid) {
       this.errorMessage = 'Please fill in the form';
+      this.notificationsService.showAlert(this.errorMessage, NotificationType.AlertError)
       return;
     }
-    const form = this.loginForm.value;
+    const { identifier, password } = this.loginForm.value;
     this.authSevice
-      .login(form.identifier || '', form.password || '')
+      .login(identifier, password)
       .subscribe({
         next: () => {
           this.errorMessage = '';
+          this.notificationsService.showAlert('Login succesful', NotificationType.AlertSuccess)
 
         },
         error: (error) => {
           this.errorMessage = error.message || 'Login failed';
+          this.notificationsService.showAlert(this.errorMessage, NotificationType.AlertError)
         }
       });
   }
