@@ -13,5 +13,4 @@ export class NotificationComponent {
   showNotification = input.required<Boolean>()
   notificationMessage = input<String>()
   notificationType = input.required<NotificationType>()
-
 }

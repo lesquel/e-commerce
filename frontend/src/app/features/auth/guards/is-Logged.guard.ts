@@ -4,12 +4,13 @@ import { UserService } from '../services';
 import { siteRoutesConfig } from '@app/features/site';
 
 export const isLoggedGuard: CanActivateFn = (route, state) => {
-  const userService = inject(UserService)
-  const router = inject(Router)
+  const userService = inject(UserService);
+  const router = inject(Router);
+  const isAuthenticated = userService.isAuthenticated();
 
-  if (userService.isAuthenticated()) {
-    router.navigate([siteRoutesConfig.base.url])
-    return false
+  if (isAuthenticated()) {
+    router.navigate([siteRoutesConfig.base.url]);
+    return false;
   }
 
   return true;

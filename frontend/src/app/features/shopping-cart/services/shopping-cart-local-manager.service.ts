@@ -24,8 +24,8 @@ export class ShoppingCartLocalManagerService {
   });
 
   productItemsAsArray = computed(() => {
-    return Array.from(this.productItems().values()).map((p : any) => {
-      const productCart = p[1] as ProductCart;
+    return Array.from(this.productItems().values()).map((p: any) => {
+      const productCart = p[1] || p as ProductCart;
       return { quantity: productCart.quantity, product: productCart.product };
     });
   });
@@ -62,7 +62,6 @@ export class ShoppingCartLocalManagerService {
   }
 
   addProductItem(productCart: ProductCart): void {
-    console.log('addProductItem', this.getProductCart(productCart.product.documentId));
     if (this.getProductCart(productCart.product.documentId)) {
       const productCartLocal = this.getProductCart(
         productCart.product.documentId
@@ -129,8 +128,6 @@ export class ShoppingCartLocalManagerService {
     if (!shoppingCart) return;
 
     const parsedCart = JSON.parse(shoppingCart) as ShoppingCartLocal;
-    console.log('parsedCart', parsedCart.product_carts);
-
     this.dataCartSignal.set(parsedCart);
   }
 

@@ -28,7 +28,6 @@ export class AppComponent {
       this.notificationType = res.notificationType;
       setTimeout(() => {
         this.showAlert = false
-
       }, res.time);
     })
   }

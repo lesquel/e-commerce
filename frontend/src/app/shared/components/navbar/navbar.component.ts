@@ -30,8 +30,6 @@ export class NavbarComponent {
   productsRoutesConfig = productsRoutesConfig;
 
   userService = inject(UserService);
+  isAuthenticated$ = this.userService.isAuthenticated();
 
-  get isAuthenticated(): Boolean {
-    return this.userService.isAuthenticated();
-  }
 }

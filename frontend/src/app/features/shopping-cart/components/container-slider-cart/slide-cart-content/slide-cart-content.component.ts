@@ -17,10 +17,9 @@ import { SlideItemProductComponent } from "./slide-item-product/slide-item-produ
 export class SlideCartContentComponent  implements  OnInit {
   private shoppingCartLocalManagerService = inject(ShoppingCartLocalManagerService);
   items = this.shoppingCartLocalManagerService.productItemsAsArray;
-  constructor() {
-    console.log("items", this.items());
-  }
+
   ngOnInit(): void {
-    console.log("ngOnInit");
+    console.log('SlideCartContentComponent initialized');
+    console.log(this.items);
   }
 }

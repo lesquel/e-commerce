@@ -23,8 +23,8 @@ export class ProductCardComponent {
     event.preventDefault()
     event.stopPropagation()
     this.shoppingCartLocalManager.addProductItem({
-      product: this.product()!,
-      quantity: 1,
+      product: this.product(),
+      quantity: 1
     });
   }
 

@@ -9,4 +9,9 @@ import { ProductCart } from '@app/features/shopping-cart/models';
 })
 export class SlideItemProductComponent {
   productItem = input.required<ProductCart>();
+
+  constructor() {
+    console.log('SlideItemProductComponent');
+  }
 }
+  

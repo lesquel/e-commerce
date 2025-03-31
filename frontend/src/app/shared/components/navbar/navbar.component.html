@@ -1,3 +1,4 @@
+@let isAuthenticated = isAuthenticated$();
 <div class="navbar bg-base-100 shadow-sm top-0 sticky z-50">
   <div class="navbar-start">
     <div class="dropdown">
@@ -35,8 +36,8 @@
     </ul>
   </div>
   <div class="navbar-end">
-    <app-shopping-cart-button [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated$ | async" />
-    <app-button-is-logged [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated$ |async" />
+    <app-shopping-cart-button [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated" />
+    <app-button-is-logged [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated" />
     <app-theme-controller />
   </div>
 </div>

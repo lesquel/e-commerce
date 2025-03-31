@@ -1,7 +1,9 @@
 <ul class="menu menu-horizontal">
   <li>
     <details>
-      <app-avatar></app-avatar>
+      <summary>
+        <app-avatar></app-avatar>
+      </summary>
       <ul class="p-2">
         <li><a [routerLink]="[authRoutesConfig().children.me.url]">Mi cuenta</a></li>
         <li><p (click)="logout()">Logout</p></li>
