@@ -5,5 +5,4 @@ import { ProductCart } from './product-cart.model';
 
 export interface ShoppingCartLocal extends InfoBasicEntity {
   user: User;
-  product_carts: Map<string, ProductCart>;
 }
