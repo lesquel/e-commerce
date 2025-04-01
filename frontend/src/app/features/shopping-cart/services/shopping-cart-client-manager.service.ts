@@ -109,7 +109,7 @@ export class ShoppingCartClientManagerService {
 
   createShoppingCartBody() {
     return {
-      user: this.user?.documentId as User,
+      user: this.user as User,
       product_carts: [],
       isActive: true,
     };
@@ -117,7 +117,7 @@ export class ShoppingCartClientManagerService {
 
   createShoppingCart(): Observable<ShoppingCart> {
     const url = `${this.urlShoppingCart}`;
-    return this.http.post<ShoppingCart>(url, , {
+    return this.http.post<ShoppingCart>(url, this.createShoppingCartBody(), {
       headers: {
         Authorization: this.userService.useTokenClient(),
       },
