@@ -32,9 +32,7 @@ export class AuthService {
         map((response: any) => {
           const adaptedUser = userAdapter(response);
           this.userService.saveUser(adaptedUser);
-          console.log('WE ARE IN LOGIN')
           this.router.navigate([siteRoutesConfig.base.url]);
-          console.log('IT SHOULD HAVE REDIRECTED BY NOW')
           localStorage.setItem('user', JSON.stringify(adaptedUser.jwt));
           return adaptedUser;
         }),
