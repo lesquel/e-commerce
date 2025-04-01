@@ -62,6 +62,7 @@ export class ShoppingCartLocalManagerService {
   }
 
   addProductItem(productCart: ProductCart): void {
+
     if (this.getProductCart(productCart.product.documentId)) {
       const productCartLocal = this.getProductCart(
         productCart.product.documentId

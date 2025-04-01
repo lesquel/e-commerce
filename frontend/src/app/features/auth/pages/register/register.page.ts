@@ -33,7 +33,7 @@ export class RegisterPage {
     this.initRegisterForm()
   }
 
-  initRegisterForm() {
+  private initRegisterForm() {
 
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

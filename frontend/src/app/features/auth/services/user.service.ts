@@ -11,8 +11,8 @@ export class UserService {
   private cookieService = inject(CookieService);
   private router = inject(Router);
 
-  private isAuthenticatedSubject = signal<boolean>(this.checkUserAuth());
-  
+  private isAuthenticatedSignal = signal<boolean>(this.checkUserAuth());
+
 
   private checkUserAuth(): boolean {
     return !!this.cookieService.get('user');
@@ -27,7 +27,7 @@ export class UserService {
       expires: 99999999,
       path: '/',
     });
-    this.isAuthenticatedSubject.set(true);
+    this.isAuthenticatedSignal.set(true);
   }
 
   getUser(): User | null {
@@ -36,16 +36,12 @@ export class UserService {
   }
 
   isAuthenticated(): Signal<boolean> {
-    return this.isAuthenticatedSubject;
+    return this.isAuthenticatedSignal;
   }
 
   logout(): void {
     this.cookieService.delete('user', '/');
-    this.isAuthenticatedSubject.set(false);
-    if (this.router.url === '/') {
-      location.reload();
-      return;
-    }
+    this.isAuthenticatedSignal.set(false);
     this.router.navigate(['/']);
   }
 }

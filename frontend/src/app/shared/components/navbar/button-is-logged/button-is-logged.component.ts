@@ -12,5 +12,5 @@ import { AvatarNavbarComponent } from './avatar-navbar/avatar-navbar.component';
 })
 export class ButtonIsLoggedComponent {
   authRoutesConfig = input.required<RoutesConfig>();
-  isAuthenticated = input.required<Boolean | null>();
+  isAuthenticated = input.required<Boolean>();
 }

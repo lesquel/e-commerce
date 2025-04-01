@@ -34,7 +34,7 @@ export class LoginPage {
     this.initLoginForm();
   }
 
-  initLoginForm() {
+  private initLoginForm() {
     this.loginForm = this.fb.group({
       identifier: ['', [Validators.required]],
       password: ['', [Validators.required]],

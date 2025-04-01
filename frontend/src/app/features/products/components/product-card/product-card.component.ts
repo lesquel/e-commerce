@@ -4,6 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { productsRoutesConfig } from '../../config';
 import { ShoppingCartLocalManagerService } from '@app/features/shopping-cart';
+import { NotificationsService } from '@app/shared/services/notifications.service';
+import { NotificationType } from '@app/shared/types';
 
 @Component({
   selector: 'app-product-card',
@@ -18,6 +20,7 @@ export class ProductCardComponent {
   private shoppingCartLocalManager = inject(ShoppingCartLocalManagerService);
   readonly productsRoutesConfig = productsRoutesConfig
 
+  notificationsService = inject(NotificationsService)
 
   addToCart(event: MouseEvent) {
     event.preventDefault()
@@ -26,6 +29,7 @@ export class ProductCardComponent {
       product: this.product(),
       quantity: 1
     });
+    this.notificationsService.showAlert(`Product ${this.product().name} was added successfully to shopping cart`, NotificationType.AlertSuccess)
   }
 
 } 
