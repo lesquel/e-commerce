@@ -3,6 +3,7 @@ import { User } from '../models';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { get } from 'http';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,6 @@ export class UserService {
   private router = inject(Router);
 
   private isAuthenticatedSubject = signal<boolean>(this.checkUserAuth());
-  
 
   private checkUserAuth(): boolean {
     return !!this.cookieService.get('user');
@@ -47,5 +47,9 @@ export class UserService {
       return;
     }
     this.router.navigate(['/']);
+  }
+
+  useTokenClient(): string {
+    return 'Bearer ' + this.getUser()?.jwt;
   }
 }
