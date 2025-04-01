@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RoutesConfig } from '@app/shared/types';
 import { ContainerSliderCartComponent } from '@features/shopping-cart/components/';

@@ -20,6 +20,7 @@ import { NotificationType } from '@app/shared/types';
 })
 export class ProductCardComponent {
   product = input.required<Product>();
+
   readonly productsRoutesConfig = productsRoutesConfig;
 
   notificationsService = inject(NotificationsService)
