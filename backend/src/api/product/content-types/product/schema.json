@@ -25,8 +25,12 @@
     "prices": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::price.price",
-      "mappedBy": "product"
+      "target": "api::price.price"
+    },
+    "currentPrice": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::price.price"
     }
   }
 }
