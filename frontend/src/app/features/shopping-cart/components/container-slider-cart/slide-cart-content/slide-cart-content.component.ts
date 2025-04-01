@@ -1,9 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
-  input,
-  OnDestroy,
 } from '@angular/core';
 import { SlideItemProductComponent } from './slide-item-product/slide-item-product.component';
 

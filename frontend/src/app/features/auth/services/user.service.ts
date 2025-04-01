@@ -12,12 +12,8 @@ export class UserService {
   private cookieService = inject(CookieService);
   private router = inject(Router);
 
-<<<<<<< HEAD
-  private isAuthenticatedSubject = signal<boolean>(this.checkUserAuth());
-=======
   private isAuthenticatedSignal = signal<boolean>(this.checkUserAuth());
 
->>>>>>> 765d6f4207e9b5c7ca075f46a1e48ffb6176ee6b
 
   private checkUserAuth(): boolean {
     return !!this.cookieService.get('user');
