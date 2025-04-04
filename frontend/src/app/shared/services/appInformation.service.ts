@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Global } from '../../features/site/models/global.model';
 import { GlobalDataService } from './globalData.service';
 import { Meta, Title } from '@angular/platform-browser';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +24,10 @@ export class AppInformationService {
     this.globalDataService.getGlobalData().subscribe({
       next: (globalData) => {
         this.appInformation.set(globalData);
-        console.log(this.appInformation)
       },
       error: (error) => {
         console.error('Error loading global data', error);
+        return throwError(()=> new Error(error.error.error.message || 'Couldt load app info' ))
       },
     });
   }
@@ -36,7 +37,10 @@ export class AppInformationService {
     const title = newTitle ? `${currentTitle} | ${newTitle}` : currentTitle;
     this.titleService.setTitle(title);
   }
-  
+  getTittle(): string{
+    console.log(this.titleService.getTitle())
+    return this.titleService.getTitle()
+  }
 
   setMeta(name: string, content: string): void {
     this.metaService.updateTag({ name, content });
