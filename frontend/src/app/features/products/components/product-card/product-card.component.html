@@ -1,7 +1,7 @@
 <a [routerLink]="[productsRoutesConfig.children.detail.url, product().documentId]">
-    <div class="card bg-base-100 w-full max-w-sm shadow-sm p-4">
+    <div class="card bg-base-100 w-full max-w-sm shadow-sm p-4 hover:bg-base-200">
         <figure>
-            <img class="w-full h-auto object-cover"
+            <img class="w-full h-auto object-cover hover:scale-110"
                 src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Product Image" />
         </figure>
 
@@ -17,11 +17,11 @@
                     <div class="badge badge-outline">Products</div>
                 </div>
 
-                <button class="btn btn-circle transition-transform transform hover:scale-115"
-                    (click)="addToCart($event)">
+                <button (click)="addToCart($event)"
+                    class="btn rounded-3xl btn-outline transition-transform transform hover:scale-110 hover:bg-transparent hover:border-inherit hover:text-inherit ">
                     <mat-icon>add_shopping_cart</mat-icon>
                 </button>
             </div>
-        </div>
+        </div> 
     </div>
 </a>

@@ -9,6 +9,7 @@ import { ProductCardSkeletonComponent } from '../../components';
 import { NotificationsService } from '@app/shared/services/notifications.service';
 import { error } from 'console';
 import { NotificationType } from '@app/shared/types';
+import { AppInformationService } from '@app/shared/services/appInformation.service';
 
 @Component({
     selector: 'product-list-page',
@@ -18,24 +19,31 @@ import { NotificationType } from '@app/shared/types';
 export class ProductListPage {
     private subscription!: Subscription;
 
-    productService = inject(ProductService)
-    notificationsService = inject(NotificationsService)
+    private productService = inject(ProductService)
+    private notificationsService = inject(NotificationsService)
+    private appInformationService = inject(AppInformationService)
+
+
 
     productsList!: Product[]
     loading = true
 
     ngOnInit() {
-        this.productService.getProducts().subscribe(products => {
-            this.productsList = products.data;
-            this.loading = false;
+        this.productService.getProducts().subscribe({
+            next: (products) => {
+                this.productsList = products.data;
+                this.loading = false
+            },
+            error: (error) => {
+                this.notificationsService.showAlert('Error getting products', NotificationType.AlertError)
+            }
         }
         )
-    }
 
-    productByDocumentId(index: number, product: Product) {
-        return product.documentId
+        this.appInformationService.setTitle('Product list')
 
     }
+
 
 
     ngOnDestroy() {

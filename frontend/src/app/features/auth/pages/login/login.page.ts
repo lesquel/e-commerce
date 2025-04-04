@@ -13,6 +13,7 @@ import { IInputField, NotificationType } from '@app/shared/types';
 import { AuthFormComponent } from '../../components/auth-form/auth-form.component';
 import { Router } from 'express';
 import { NotificationsService } from '@app/shared/services/notifications.service';
+import { AppInformationService } from '@app/shared/services/appInformation.service';
 
 @Component({
   selector: 'login-page',
@@ -26,12 +27,16 @@ export class LoginPage {
   authRoutesConfig = authRoutesConfig;
   errorMessage = '';
 
-  authSevice = inject(AuthService);
-  notificationsService = inject(NotificationsService);
+  private authSevice = inject(AuthService);
+  private notificationsService = inject(NotificationsService);
+  private appInformationService = inject(AppInformationService)
+
   private fb = inject(FormBuilder);
 
   ngOnInit() {
     this.initLoginForm();
+    this.appInformationService.setTitle('Login')
+
   }
 
   private initLoginForm() {

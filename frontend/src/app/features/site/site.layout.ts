@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
-import { SiteService } from './services';
+import { AppInformationService } from '@app/shared/services/appInformation.service';
 
 @Component({
   selector: 'site-layout',
@@ -11,25 +10,12 @@ import { SiteService } from './services';
   `,
 })
 export class SiteLayout implements OnInit {
-  private titleService = inject(Title);
-  private metaService = inject(Meta);
-  private siteService = inject(SiteService);
-  
+  private appInformationService = inject(AppInformationService)
+
   ngOnInit(): void {
-    this.siteService.getGlobalData().subscribe({
-      next: (data) => {
-        this.titleService.setTitle(data.siteName);
-        this.metaService.updateTag({
-          name: 'description',
-          content: data.siteDescription,
-        });
-        // this.updateFavicon(data.favicon);
-      },
-      error: (error) => {
-        console.error('Error al obtener los datos del sitio:', error);
-      },
-    });
-  }
+    this.appInformationService.setTitle()
+  };
+
 
   // private updateFavicon(faviconUrl: string): void {
   //   let link: HTMLLinkElement | null =

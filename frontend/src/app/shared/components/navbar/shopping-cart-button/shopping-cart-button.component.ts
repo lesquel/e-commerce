@@ -30,5 +30,11 @@ export class ShoppingCartButtonComponent {
 
   isAuthenticated = input.required<Boolean>();
 
-  totalProducts = signal(0);
+
+  totalProducts = computed(() =>
+    0
+  );
+
+
+
 }
