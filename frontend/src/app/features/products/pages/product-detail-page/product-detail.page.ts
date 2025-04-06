@@ -1,18 +1,21 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Product } from '../../models';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { productsRoutesConfig } from '../../config';
 import { Subscription } from 'rxjs';
 import { siteRoutesConfig } from '@app/features/site';
 import { AppInformationService } from '@app/shared/services/appInformation.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductDetailBreadcrumsComponent } from "../../components/product-detail-breadcrums/product-detail-breadcrums.component";
+import { ProductDetailImageGalleryComponent } from "../../components/product-detail-image-gallery/product-detail-image-gallery.component";
+import { ProductDetailInformationComponent } from "../../components/product-detail-information/product-detail-information.component";
 
 
 @Component({
   selector: 'app-product-detail',
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule, ProductDetailBreadcrumsComponent, ProductDetailImageGalleryComponent, ProductDetailInformationComponent],
   templateUrl: './product-detail.page.html',
   changeDetection: ChangeDetectionStrategy.Default
 })
@@ -30,7 +33,6 @@ export class ProductDetailPage {
   private router = inject(Router)
 
   readonly productsRoutesConfig = productsRoutesConfig
-  readonly siteRoutesConfig = siteRoutesConfig
 
 
   ngOnInit() {
