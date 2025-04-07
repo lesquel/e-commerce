@@ -13,6 +13,7 @@ import { UserService } from '@app/features/auth/services';
 import { shoppingCartAdapter, shoppingCartsAdapter } from '../adapters';
 import { ManageStorageCartService } from './manage-storage-cart.service';
 import { User } from '@app/features/auth/models';
+import { userAdapter } from '@app/features/auth/adapters';
 
 // getShoppingCarts ?populate[product_carts][populate]=product&populate=user
 // || http://localhost:1337/api/shopping-carts/inrfdgkz5uf6jf378nir2hkv?populate[product_carts][populate]=product&populate=user
@@ -109,18 +110,75 @@ export class ShoppingCartClientManagerService {
 
   createShoppingCartBody() {
     return {
-      user: this.user as User,
       product_carts: [],
       isActive: true,
     };
   }
 
-  createShoppingCart(): Observable<ShoppingCart> {
-    const url = `${this.urlShoppingCart}`;
-    return this.http.post<ShoppingCart>(url, this.createShoppingCartBody(), {
-      headers: {
-        Authorization: this.userService.useTokenClient(),
+  createShopping() {
+    this.createShoppingCart().subscribe({
+      next: (shoppingCart) => {
+        this.conectShoppingCart(shoppingCart.id).subscribe({
+          next: (user) => {
+            this.manageStorageCartService.saveShoppingCartLocal({
+              user : this.user as User,
+              ...shoppingCart,
+            });
+          },
+          error: (error) => {
+            console.error(error);
+          },
+        });
+      },
+      error: (error) => {
+        console.error(error);
       },
     });
+  }
+
+  private createShoppingCart(): Observable<ShoppingCart> {
+    const url = `${this.urlShoppingCart}`;
+    return this.http
+      .post<ShoppingCart>(url, this.createShoppingCartBody(), {
+        headers: {
+          Authorization: this.userService.useTokenClient(),
+        },
+      })
+      .pipe(
+        map((shoppingCart: any) => {
+          return shoppingCartAdapter(shoppingCart);
+        }),
+        catchError((error) => {
+          console.error(error);
+          return throwError(() => {
+            new Error(error.error.error.message || 'Shopping Cart failed');
+          });
+        })
+      )
+  }
+
+  private conectShoppingCart(id: number): Observable<User> {
+    const url = `${this.baseUrl}/api/users/${this.user?.id}`;
+    return this.http
+      .put<User>(
+        url,
+        {
+          shopping_carts: { connect: [id] },
+        },
+        {
+          headers: {
+            Authorization: this.userService.useTokenClient(),
+          },
+        }
+      )
+      .pipe(
+        map((shoppingCart: any) => userAdapter(shoppingCart)),
+        catchError((error) => {
+          console.error(error);
+          return throwError(() => {
+            new Error(error.error.error.message || 'Shopping Cart failed');
+          });
+        })
+      );
   }
 }
