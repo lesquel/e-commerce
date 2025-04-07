@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-hidden min-h-[200px]">
 
 
-    @defer (when !loading ) {
+    @defer {
     @for (product of productsList; track product.documentId) {
     <app-product-card [product]="product" />
     }
@@ -9,7 +9,7 @@
     <p class="col-span-full text-center text-gray-500 text-lg font-medium">No products available</p>
     }
     } @placeholder (minimum 1s) {
-    @for (i of [1,2,3,4,5,6,7,8]; track $index) {
+    @for (i of [].constructor(productCardSkeletonCount); track $index) {
 
     <app-product-card-skeleton />}
     }

@@ -16,7 +16,7 @@ import { ProductService } from '@app/features/products/services/product.service'
     <!-- Open the modal using ID.showModal() method -->
     
 
-    <a [routerLink]="['/teams']" routerLinkActive="router-link-active">hola</a>
+    <a [routerLink]="['/teams']"  class="bg-blue-200 dark:bg-amber-900" routerLinkActive="router-link-active">hola</a>
   `,
 })
 export class HomePage {

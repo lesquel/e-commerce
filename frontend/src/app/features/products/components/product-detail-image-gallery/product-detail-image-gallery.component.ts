@@ -10,13 +10,15 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailImageGalleryComponent {
-  readonly maxAllowedImages = 5;
 
   imageLinks = [
     "https://flowbite.s3.amazonaws.com/docs/gallery/featured/image.jpg",
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg",
+    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+    "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
     "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
   ];
@@ -26,7 +28,7 @@ export class ProductDetailImageGalleryComponent {
   selectImage(e:Event,index: number) {
     e.preventDefault()
     e.stopPropagation()
-    if (index >= this.maxAllowedImages) {
+    if (index >= this.imageLinks.length) {
       this.selectedImageIndex = 0;
       return
     }

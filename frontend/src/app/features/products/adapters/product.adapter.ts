@@ -7,7 +7,7 @@ export const productAdapter = (product: any): Product => {
         name: product.name,
         description: product.description,
         amount: product.amount,
-        individualPrice: product.individualPrice,
+        individualPrice: product.individualPrice || 0,
         createdAt: product.createdAt,
         updatedAt: product.updateDate,
     }

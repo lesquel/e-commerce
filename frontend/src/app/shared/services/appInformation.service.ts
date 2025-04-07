@@ -27,7 +27,7 @@ export class AppInformationService {
       },
       error: (error) => {
         console.error('Error loading global data', error);
-        return throwError(()=> new Error(error.error.error.message || 'Couldt load app info' ))
+        return throwError(() => new Error(error.error.error.message || 'Couldt load app info'))
       },
     });
   }
@@ -37,9 +37,8 @@ export class AppInformationService {
     const title = newTitle ? `${currentTitle} | ${newTitle}` : currentTitle;
     this.titleService.setTitle(title);
   }
-  getTittle(): string{
-    console.log(this.titleService.getTitle())
-    return this.titleService.getTitle()
+  getTittle(): string {
+    return this.appInformation()?.siteName || 'Default Site Title'
   }
 
   setMeta(name: string, content: string): void {
