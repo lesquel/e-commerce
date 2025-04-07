@@ -1,0 +1,1 @@
+export type { InfoUser } from './info-user.model';

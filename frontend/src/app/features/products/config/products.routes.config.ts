@@ -1,23 +1,21 @@
-import { RoutesConfig } from "@app/shared/types";
+import { RoutesConfig } from '@app/shared/types';
 
 export const productsRoutesConfig = {
   base: {
     path: 'products',
     url: '/products',
-    label: 'Products'
+    label: 'Products',
   },
   children: {
     list: {
       path: '',
       url: '/products',
-      label: 'Products'
+      label: 'Products',
     },
     detail: {
       path: ':documentId',
       url: '/products/',
-      label: 'Product detail'
+      label: 'Product detail',
     },
-
-  }
-
+  },
 };

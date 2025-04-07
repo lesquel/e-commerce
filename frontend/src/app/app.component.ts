@@ -14,7 +14,6 @@ import { AppInformationService } from './shared/services/appInformation.service'
     NotificationComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'E-commerce';

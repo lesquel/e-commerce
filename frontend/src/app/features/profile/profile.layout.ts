@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
 @Component({
-  selector: 'app-products-layout',
+  selector: 'app-profile-layout',
   imports: [RouterOutlet],
-  template: ` <router-outlet></router-outlet> `,
+  template: `<router-outlet />`,
 })
-export class ProductsLayout {}
+export class ProfileLayout {}

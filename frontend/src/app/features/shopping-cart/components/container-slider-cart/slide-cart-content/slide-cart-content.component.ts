@@ -6,7 +6,7 @@ import { SlideItemProductComponent } from './slide-item-product/slide-item-produ
 
 @Component({
   selector: 'app-slide-cart-content',
-  imports: [SlideItemProductComponent],
+  imports: [],
   templateUrl: './slide-cart-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
