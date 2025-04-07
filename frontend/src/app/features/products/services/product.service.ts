@@ -37,7 +37,7 @@ export class ProductService {
       }),
       catchError((error) => {
         return throwError(
-          () => new Error(error.error.error.message || 'Couldnt get a product')
+          () => new Error(error.error.error.message || 'Couldnt get the product')
         );
       }))
   }

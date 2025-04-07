@@ -11,6 +11,7 @@ import { UserService } from '@app/features/auth/services';
 import { ShoppingCartButtonComponent } from './shopping-cart-button/shopping-cart-button.component';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { AppInformationService } from '@app/shared/services/appInformation.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +30,16 @@ export class NavbarComponent {
   authRoutesConfig = authRoutesConfig;
   productsRoutesConfig = productsRoutesConfig;
 
-  userService = inject(UserService);
+  private userService = inject(UserService);
+  private appInformationService = inject(AppInformationService)
   isAuthenticated = this.userService.isAuthenticated();
+  appTittle!: string;
+
+  ngOnInit() {
+    this.appTittle = this.appInformationService.getTittle()
+
+  }
+
+
 
 }

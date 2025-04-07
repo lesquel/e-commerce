@@ -1,1 +1,21 @@
-{{product.name}}
+<div class="w-full h-screen overflow-x-hidden">
+    <div class="max-w-[85%] w-[95%] mx-auto">
+
+        <div class="w-full py-2">
+            <app-product-detail-breadcrums [productName]="product.name"></app-product-detail-breadcrums>
+        </div>
+        <div class="flex flex-col md:flex-row h-full justify-center gap-15">
+
+
+            <div class="w-full md:w-1/2">
+
+                <app-product-detail-image-gallery></app-product-detail-image-gallery>
+            </div>
+
+            <div class="w-full md:w-1/2">
+                <app-product-detail-information [product]="product"></app-product-detail-information>
+            </div>
+        </div>
+
+    </div>
+</div>

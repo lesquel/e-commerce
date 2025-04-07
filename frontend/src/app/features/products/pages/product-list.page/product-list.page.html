@@ -1,16 +1,21 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-hidden min-h-[200px]">
 
-    @if (loading) {
-    @for (i of [1,2,3,4,5,6,7,8]; track $index) {
-    <app-product-card-skeleton></app-product-card-skeleton>
-    }
-    } @else {
+
+    @defer {
     @for (product of productsList; track product.documentId) {
-    <app-product-card [product]="product"></app-product-card>
+    <app-product-card [product]="product" />
     }
     @empty {
     <p class="col-span-full text-center text-gray-500 text-lg font-medium">No products available</p>
     }
+    } @placeholder (minimum 1s) {
+    @for (i of [].constructor(productCardSkeletonCount); track $index) {
+
+    <app-product-card-skeleton />}
+    }
+    @loading (minimum 1s;after 500s){
+    <p class="col-span-full text-center text-gray-400">Loading products...</p>
+
     }
 
 </div>

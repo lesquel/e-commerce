@@ -47,11 +47,6 @@ export class ThemeControllerComponent implements OnInit {
   }
 
 
-  get themeIcon() {
-    return this.getTheme() === 'light' ? 'light_mode' : 'dark_mode';
-  }
-
-
   toggleTheme(): void {
     const currentTheme = this.getAtribute();
     const newTheme: Theme = currentTheme === 'light' ? 'dark' : 'light';

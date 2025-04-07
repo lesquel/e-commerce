@@ -1,0 +1,18 @@
+<div class="cursor-pointer flex align-middle gap-2">
+    <p class="text-yellow-700 dark:text-gray-400">
+        {{rating()}}
+    </p>
+
+    <div class="hover:text-yellow-400 ">
+        @for (i of [].constructor(maxRating); track $index) {
+        @if ($index < fullStars) { <mat-icon>star</mat-icon>
+            }
+            @else if ($index === halfStarIndex) {
+            <mat-icon>star_half</mat-icon>
+            }
+            @else {
+            <mat-icon>star_border</mat-icon>
+            }
+            }
+    </div>
+</div>

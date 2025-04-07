@@ -26,13 +26,13 @@ export class ProductListPage {
 
 
     productsList!: Product[]
-    loading = true
+
+    readonly productCardSkeletonCount: number = 8
 
     ngOnInit() {
         this.productService.getProducts().subscribe({
             next: (products) => {
                 this.productsList = products.data;
-                this.loading = false
             },
             error: (error) => {
                 this.notificationsService.showAlert('Error getting products', NotificationType.AlertError)

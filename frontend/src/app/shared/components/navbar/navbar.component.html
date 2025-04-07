@@ -16,7 +16,7 @@
         </li>
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl" [routerLink]="['/']">E-commerce </a>
+    <a class="btn btn-ghost text-xl" [routerLink]="['/']">{{appTittle}}</a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
@@ -37,6 +37,6 @@
   <div class="navbar-end">
     <app-shopping-cart-button [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated()" />
     <app-button-is-logged [authRoutesConfig]="authRoutesConfig" [isAuthenticated]="isAuthenticated()" />
-    <app-theme-controller />
+    <app-theme-controller />  
   </div>
 </div>
