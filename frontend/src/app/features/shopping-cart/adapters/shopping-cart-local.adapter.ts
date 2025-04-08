@@ -1,11 +1,14 @@
-import { ShoppingCartLocal } from "../models/shopping-cart-local.model";
+import { ShoppingCartLocal } from '../models/shopping-cart-local.model';
 
-export const shoppingCartLocalAdapter = (shoppingCartLocal: any): ShoppingCartLocal => {
+export const shoppingCartLocalAdapter = (
+  shoppingCartLocalData: any
+): ShoppingCartLocal => {
+  const shoppingCartLocal = shoppingCartLocalData.data ?? shoppingCartLocalData;
   return {
-    id: shoppingCartLocal.data.id,
-    documentId: shoppingCartLocal.data.documentId,
-    user: shoppingCartLocal.data.user,
-    createdAt: shoppingCartLocal.data.createdAt,
-    updatedAt: shoppingCartLocal.data.updatedAt,
+    id: shoppingCartLocal.id,
+    documentId: shoppingCartLocal.documentId,
+    user: shoppingCartLocal.user,
+    createdAt: shoppingCartLocal.createdAt,
+    updatedAt: shoppingCartLocal.updatedAt,
   };
 };

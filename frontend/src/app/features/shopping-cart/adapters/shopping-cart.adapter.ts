@@ -1,14 +1,15 @@
 import { ShoppingCart, ShoppingCarts } from '../models';
 
-export const shoppingCartAdapter = (shoppingCart: any): ShoppingCart => {
+export const shoppingCartAdapter = (shoppingCartData: any): ShoppingCart => {
+  const shoppingCart = shoppingCartData.data ?? shoppingCartData;
   return {
-    id: shoppingCart.data.id,
-    documentId: shoppingCart.data.documentId,
-    user: shoppingCart.data.user,
-    product_carts: shoppingCart.data.product_carts,
-    isActive: shoppingCart.data.isActive,
-    createdAt: shoppingCart.data.createdAt,
-    updatedAt: shoppingCart.data.updatedAt,
+    id: shoppingCart.id,
+    documentId: shoppingCart.documentId,
+    user: shoppingCart.user,
+    product_carts: shoppingCart.product_carts ?? [],
+    isActive: shoppingCart.isActive,
+    createdAt: shoppingCart.createdAt,
+    updatedAt: shoppingCart.updatedAt,
   };
 };
 

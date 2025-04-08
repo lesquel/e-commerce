@@ -10,6 +10,7 @@ import { authRoutesConfig } from '../config';
 
 import { environment } from '@environments/environment.development';
 import { siteRoutesConfig } from '@app/features/site';
+import { InfoUserService } from '@app/features/profile/services';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private userService = inject(UserService);
+  private infoUserService = inject(InfoUserService);
 
   private imageService = inject(ImageService);
 
@@ -82,6 +84,7 @@ export class AuthService {
         map((user) => {
           const adaptedUser = userAdapter(user);
           this.userService.saveUser(adaptedUser);
+
           this.router.navigate(['/']);
           return adaptedUser;
         }),

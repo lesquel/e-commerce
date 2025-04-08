@@ -1,6 +1,6 @@
 export { imgAdapter } from './img.utils';
-export { createPagination } from './create-pagination.util';
-export { createPopulate } from './create-populate.util';
-export { createFilterId } from './create-filter-id.util';
+export { createPagination } from './magene-url/create-pagination.util';
+export { createPopulate } from './magene-url/create-populate.util';
+export { createFilterId } from './magene-url/create-filter-id.util';
 export { onFileSelected } from './selectedFile.util';
-export { createFilterAttributes } from './create-filter-attributes';
+export { createFilterAttributes } from './magene-url/create-filter-attributes';

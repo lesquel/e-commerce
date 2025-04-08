@@ -1,4 +1,11 @@
-<!-- @let itemsLocal = items(); 
-@for (item of itemsLocal; track item.product.id) {
-    <app-slide-item-product [productItem]="item"></app-slide-item-product>
-} -->
+@let itemsLocal = items()?.product_carts; @defer (when itemsLocal) { 
+    @if (itemsLocal?.length === 0) {
+        <div class="flex justify-center items-center w-full mt-10">
+            <app-no-items-in-shopping-cart />
+        </div>
+    } @else { 
+        @for (item of itemsLocal; track item.product.id) {
+            <app-slide-item-product [productItem]="item" />
+        } 
+    } 
+}

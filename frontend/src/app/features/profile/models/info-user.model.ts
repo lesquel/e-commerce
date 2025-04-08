@@ -1,3 +1,4 @@
+import { Meta } from '@angular/platform-browser';
 import { User } from '@app/features/auth/models';
 import { InfoBasicEntity } from '@app/shared/models';
 
@@ -9,4 +10,9 @@ export interface InfoUser extends InfoBasicEntity {
   gender?: string;
   user?: User;
   birthDate?: Date;
+}
+
+export interface InfoUsers {
+  data: InfoUser[];
+  meta: Meta;
 }

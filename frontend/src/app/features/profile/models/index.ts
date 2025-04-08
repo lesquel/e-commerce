@@ -1,1 +1,1 @@
-export type { InfoUser } from './info-user.model';
+export type { InfoUser, InfoUsers } from './info-user.model';
