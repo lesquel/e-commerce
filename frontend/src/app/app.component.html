@@ -1,8 +1,8 @@
-<div class="min-h-screen">
-  <app-navbar />
-  <main class="min-h-full">
-    <router-outlet />
-  </main>
-  <app-notification></app-notification>
-  <app-footer />
-</div>
+<app-navbar />
+
+<main class="flex flex-grow min-h-screen flex-col">
+  <router-outlet />
+</main>
+
+<app-notification />
+<app-footer />
