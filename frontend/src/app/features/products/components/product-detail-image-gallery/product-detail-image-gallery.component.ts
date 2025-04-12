@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-product-detail-image-gallery',
-  imports: [CommonModule, MatIconModule,ImageModalComponent],
+  imports: [CommonModule, MatIconModule, ImageModalComponent],
   templateUrl: './product-detail-image-gallery.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -25,17 +25,18 @@ export class ProductDetailImageGalleryComponent {
 
   selectedImageIndex = 0;
 
-  selectImage(e:Event,index: number) {
+  selectImage(e: Event, index: number) {
     e.preventDefault()
     e.stopPropagation()
-    if (index >= this.imageLinks.length) {
-      this.selectedImageIndex = 0;
-      return
-    }
-    this.selectedImageIndex = index
+    this.updateSelectedImageIndex(index)
+
 
   }
 
+
+  updateSelectedImageIndex(index: number) {
+    this.selectedImageIndex = index
+  }
 
 
 }
