@@ -1,62 +1,89 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap, Subscription, of } from 'rxjs';
+
 import { Product } from '../../models';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { productsRoutesConfig } from '../../config';
-import { Subscription } from 'rxjs';
-import { siteRoutesConfig } from '@app/features/site';
-import { AppInformationService } from '@app/shared/services/appInformation.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ProductDetailBreadcrumsComponent } from "../../components/product-detail-breadcrums/product-detail-breadcrums.component";
-import { ProductDetailImageGalleryComponent } from "../../components/product-detail-image-gallery/product-detail-image-gallery.component";
-import { ProductDetailInformationComponent } from "../../components/product-detail-information/product-detail-information.component";
 
+import { AppInformationService } from '@app/shared/services/appInformation.service';
+
+import { CommonModule } from '@angular/common';
+import { ProductDetailBreadcrumsComponent } from '../../components/product-detail-breadcrums/product-detail-breadcrums.component';
+import { ProductDetailImageGalleryComponent } from '../../components/product-detail-image-gallery/product-detail-image-gallery.component';
+import { ProductDetailInformationComponent } from '../../components/product-detail-information/product-detail-information.component';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, ProductDetailBreadcrumsComponent, ProductDetailImageGalleryComponent, ProductDetailInformationComponent],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ProductDetailBreadcrumsComponent,
+    ProductDetailImageGalleryComponent,
+    ProductDetailInformationComponent,
+    ProductCardComponent,
+  ],
   templateUrl: './product-detail.page.html',
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
 })
-export class ProductDetailPage {
+export class ProductDetailPage implements OnInit, OnDestroy {
   product: Product = {} as Product;
+  similarProducts: Product[] = [];
 
-  subscription!: Subscription
-  private cd = inject(ChangeDetectorRef);
+  private readonly cd = inject(ChangeDetectorRef);
+  private readonly productService = inject(ProductService);
+  private readonly appInformationService = inject(AppInformationService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
+  readonly productsRoutesConfig = productsRoutesConfig;
 
+  private subscription = new Subscription();
 
-  private productsService = inject(ProductService)
-  private appInformationService = inject(AppInformationService)
-  private route = inject(ActivatedRoute)
-  private router = inject(Router)
+  ngOnInit(): void {
 
-  readonly productsRoutesConfig = productsRoutesConfig
+    const routeSub = this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          const documentId = params.get('documentId');
+          if (!documentId) {
+            this.router.navigate(['/not-found']);
+            return of(null);
+          }
 
+          return this.productService.getProductByDocumentId(documentId);
+        },)
+      )
+      .subscribe({
+        next: (response) => {
+          if (!response) return;
 
-  ngOnInit() {
-    const productDocumentId = this.route.snapshot.paramMap.get('documentId') || ""
+          this.product = response.data;
+          this.appInformationService.setTitle(this.product.name);
+          this.product = response.data;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    this.subscription = this.productsService.getProductByDocumentId(productDocumentId).subscribe({
-      next: (response) => {
-        this.product = response.data
-        console.log(this.product)
-        this.appInformationService.setTitle(this.product.name)
-        this.cd.detectChanges();
+          this.loadSimilarProducts();
+        },
+        error: () => {
+          this.router.navigate(['/not-found']);
+        },
+      });
 
-      },
-      error: (error) => {
-        this.router.navigate(['/not-found'])
-      }
-    }
-    )
+    this.subscription.add(routeSub);
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe()
-    }
+  private loadSimilarProducts(): void {
+    const sub = this.productService.getProducts().subscribe((res) => {
+      this.similarProducts = res.data.slice(0, 4);
+      this.cd.markForCheck();
+    });
+
+    this.subscription.add(sub);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
