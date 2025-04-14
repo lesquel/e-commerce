@@ -7,9 +7,9 @@ import { ContainerSliderCartComponent } from '@features/shopping-cart/components
   imports: [MatIconModule, ContainerSliderCartComponent],
   template: `
     <div
+      class="btn btn-ghost btn-circle mr-6"
       tabindex="0"
       role="button"
-      class="btn btn-ghost btn-circle mr-6"
       onclick="my_modal_2.showModal()"
     >
       <div class="indicator">

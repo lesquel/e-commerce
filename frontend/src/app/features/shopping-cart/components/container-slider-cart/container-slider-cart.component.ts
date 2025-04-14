@@ -15,6 +15,7 @@ import { SlideCartContentComponent } from './slide-cart-content/slide-cart-conte
   templateUrl: './container-slider-cart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class ContainerSliderCartComponent {
   private userService = inject(UserService);
 
